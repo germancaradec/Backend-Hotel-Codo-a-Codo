@@ -22,56 +22,73 @@ class Registros:
         }
         self.cotizaciones.append(nueva_cotizacion)
         return True # La cotizacion fue agregada.
-
+    
+    # Consultar si ya hay una cotizacion con ese código
     def consultar_cotizacion(self, codigo):
         for cotizacion in self.cotizaciones:
             if cotizacion['codigo'] == codigo:
                 return cotizacion
         return False
     
+    # Listar cotizaciones (read)
+    def listar_cotizaciones(self):
+        print("-"*50)
+        for cotizacion in self.cotizaciones:
+            print(f'Código.....................: {cotizacion["codigo"]}')
+            print(f'Check-in...................: {cotizacion["checkin"]}')
+            print(f'Check-out..................: {cotizacion["checkout"]}')
+            print(f'Tipo de habitacion.........: {cotizacion["tipoHabitacion"]}')
+            print(f'Cantidad de adultos........: {cotizacion["cantidadAdultos"]}')
+            print(f'Cantidad de menores........: {cotizacion["cantidadMenores"]}')
+            print(f'Cantidad de habitaciones...: {cotizacion["cantidadHabitaciones"]}')
+            print(f'e-mail.....................: {cotizacion["email"]}')
+            print("-"*50)
+
+    # Modificar una cotizacion (update)
+    def modificar_cotizacion(self, codigo, nuevo_checkin, nuevo_checkout, nuevo_tipoHabitacion, nueva_cantidadAdultos, nueva_cantidadMenores, nueva_cantidadHabitaciones, nuevo_email):
+        for cotizacion in self.cotizaciones:
+            if cotizacion['codigo'] == codigo:
+                cotizacion['checkin'] = nuevo_checkin
+                cotizacion['checkout'] = nuevo_checkout
+                cotizacion['tipoHabitacion'] = nuevo_tipoHabitacion
+                cotizacion['cantidadAdultos'] = nueva_cantidadAdultos
+                cotizacion['cantidadMenores'] = nueva_cantidadMenores
+                cotizacion['cantidadHabitaciones'] = nueva_cantidadHabitaciones
+                cotizacion['email'] = nuevo_email
+                return True
+        return False    
+
 
 
 # Programa principal. 
 
 registro1 = Registros()
 
+print("Agregando cotizaciones...")
+print()
+
 registro1.agregar_cotizacion(1, '2024-06-17T00:00:00.000Z', '2024-06-21T00:00:00.000Z', 'Family', 2, 3, 2, 'germancaradec@gmail.com')
 registro1.agregar_cotizacion(2, '2024-06-21T00:00:00.000Z', '2024-06-29T00:00:00.000Z', 'Deluxe', 2, 0, 1, 'robertorodriguez@gmail.com')
 registro1.agregar_cotizacion(3, '2024-07-01T00:00:00.000Z', '2024-07-25T00:00:00.000Z', 'Standard', 2, 1, 2, 'cristinaperez@gmail.com')
 registro1.agregar_cotizacion(2, '2024-07-01T00:00:00.000Z', '2024-07-25T00:00:00.000Z', 'Standard', 2, 5, 2, 'cristinaperez@gmail.com')
 
+print("Iterando cotizaciones...")
+print()
+
 for cotizacion in Registros.cotizaciones:
     print(cotizacion)
     print()
 
+print("Listando las cotizaciones...")
+registro1.listar_cotizaciones()
+
+print("Modificando una cotizacion...")
+registro1.modificar_cotizacion(2, '2024-07-01T00:00:00.000Z', '2024-07-25T00:00:00.000Z', 'Standard', 2, 5, 2, 'cristinaperez@gmail.com')
+registro1.listar_cotizaciones()
 
 
 
 
-#     # Listar productos (read)
-
-#     def listar_productos(self):
-#         print("-"*50)
-#         for producto in self.productos:
-#             print(f'Código.......: {producto["codigo"]}')
-#             print(f'Descripción..: {producto["descripcion"]}')
-#             print(f'Cantidad.....: {producto["cantidad"]}')
-#             print(f'Precio.......: {producto["precio"]}')
-#             print(f'Imagen.......: {producto["imagen"]}')
-#             print(f'Proveedor....: {producto["proveedor"]}')
-#             print("-"*50)
-
-#     # Modificar un producto (update)
-#     def modificar_producto(self, codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nueva_imagen, nuevo_proveedor):
-#         for producto in self.productos:
-#             if producto['codigo'] == codigo:
-#                 producto['descripcion'] = nueva_descripcion
-#                 producto['cantidad'] = nueva_cantidad
-#                 producto['precio'] = nuevo_precio
-#                 producto['imagen'] = nueva_imagen
-#                 producto['proveedor'] = nuevo_proveedor
-#                 return True
-#         return False    
 
 #     # Eliminar un producto
 #     def eliminar_producto(self, codigo):
@@ -96,12 +113,7 @@ for cotizacion in Registros.cotizaciones:
 
 
 
-# print("Listando los productos...")
-# catalogo.listar_productos()
 
-# print("Modificando un producto...")
-# catalogo.modificar_producto(2, 'Mouse PS2 c/ruedita', 3, 25000, 'mouse_viejo.jpg', 101)
-# catalogo.listar_productos()
 
 # print("Eliminando el producto 1...")
 # catalogo.eliminar_producto(1)
