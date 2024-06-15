@@ -58,7 +58,28 @@ class Registros:
                 return True
         return False    
 
+    # Eliminar una cotizacion
+    def eliminar_cotizacion(self, codigo):
+        for cotizacion in self.cotizaciones:
+            if cotizacion['codigo'] == codigo:
+                self.cotizaciones.remove(cotizacion)
+                return True
+        False    
 
+    # Mostrar una cotizacion
+    def mostrar_cotizacion(self, codigo):
+        cotizacion = self.consultar_cotizacion(codigo)
+        if cotizacion:
+            print("-"*50)
+            print(f'Código.....................: {cotizacion["codigo"]}')
+            print(f'Check-in...................: {cotizacion["checkin"]}')
+            print(f'Check-out..................: {cotizacion["checkout"]}')
+            print(f'Tipo de habitacion.........: {cotizacion["tipoHabitacion"]}')
+            print(f'Cantidad de adultos........: {cotizacion["cantidadAdultos"]}')
+            print(f'Cantidad de menores........: {cotizacion["cantidadMenores"]}')
+            print(f'Cantidad de habitaciones...: {cotizacion["cantidadHabitaciones"]}')
+            print(f'e-mail.....................: {cotizacion["email"]}')
+            print("-"*50)
 
 # Programa principal. 
 
@@ -87,54 +108,9 @@ registro1.modificar_cotizacion(2, '2024-07-01T00:00:00.000Z', '2024-07-25T00:00:
 registro1.listar_cotizaciones()
 
 
+print("Eliminando la cotizacion n°2...")
+registro1.eliminar_cotizacion(2)
+registro1.listar_cotizaciones()
 
-
-
-#     # Eliminar un producto
-#     def eliminar_producto(self, codigo):
-#         for producto in self.productos:
-#             if producto['codigo'] == codigo:
-#                 self.productos.remove(producto)
-#                 return True
-#         False    
-
-#     # Mostrar un producto
-#     def mostrar_producto(self, codigo):
-#         producto = self.consultar_producto(codigo)
-#         if producto:
-#             print("-"*50)
-#             print(f'Código.......: {producto["codigo"]}')
-#             print(f'Descripción..: {producto["descripcion"]}')
-#             print(f'Cantidad.....: {producto["cantidad"]}')
-#             print(f'Precio.......: {producto["precio"]}')
-#             print(f'Imagen.......: {producto["imagen"]}')
-#             print(f'Proveedor....: {producto["proveedor"]}')
-#             print("-"*50)
-
-
-
-
-
-# print("Eliminando el producto 1...")
-# catalogo.eliminar_producto(1)
-# catalogo.listar_productos()
-
-# print("Mostrando los datos del producto 3")
-# catalogo.mostrar_producto(3)
-
-
-
-
-
-
-
-
-
-# # for producto in productos:
-# #     print(producto)
-# #     print()
-
-
-# # Eliminar un producto
-# eliminar_producto(4)
-# listar_poroductos()
+print("Mostrando los datos de la cotizacion 3")
+registro1.mostrar_cotizacion(3)
