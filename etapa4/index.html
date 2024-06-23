@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="shortcut icon" href="img/hotel.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="contenedor">
+        <header id="header-lg">
+            <a href="index.html"><img src="img/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri" ></a>
+            
+            <label for="check-btn" class="check-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="icon-menu" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </label>
+            <input type="checkbox" id="check-btn">
+            
+            <nav class="menu">
+                <ul class="lista">
+                    <li class="li"><a class="item" href="index.html">HOME</a></li>
+                    <li class="li"><a class="item" href="habitaciones.html">HABITACIONES</a></li>
+                    <li class="li"><a class="item" href="gastronomia.html">GASTRONOMIA</a></li>
+                    <li class="li"><a class="item" href="contacto.html">CONTACTO</a></li>
+
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main">
+            <section class="h1-main">
+                <h1>Descubre las maravillas de las islas Maldivas con la mejor experiencia, junto a nosotros! </h1>
+            </section>
+            <form class="formulario" id="formulario" enctype="multipart/form-data">
+                <h1 class="h1-form">Completa los datos y concreta ese viaje que siempre has soñado!</h1>
+                <a href="habitaciones.html" class="boton-form">VER CARACTERISTICAS</a>
+                
+                <label for="checkin" class="check-in">Check-in:</label>
+                <input type="date" name="checkin" id="checkin">
+                
+                <label for="checkout" class="check-out">Check-out:</label>
+                <input type="date" name="checkout" id="checkout">
+                
+                <label for="tipoHabitacion" class="tipoHabitacion">Tipo de habitación:</label>
+                    <select id="tipoHabitacion" name="tipoHabitacion">
+                        <option value="" disabled selected hidden>Elija una</option>
+                        <option value="Deluxe">Deluxe</option>
+                        <option value="Family">Family</option>
+                        <option value="Standard">Standard</option>
+                    </select>
+
+
+                <label for="cantidadAdultos" class="adultos">Adultos:</label>
+                <input type="number" name="cantidadAdultos" id="cantidadAdultos" >
+                
+                <label for="cantidadMenores" class="menores">Menores:</label>
+                <input type="number" name="cantidadMenores" id="cantidadMenores" >
+                
+                <label for="cantidadHabitaciones" class="habitaciones">Habitaciones:</label>
+                <input type="number" name="cantidadHabitaciones" id="cantidadHabitaciones" >
+                
+                <label for="email" class="email">Ingrese su e-mail:</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com">
+
+                <button class="cotizar" type="submit">COTIZAR RESERVA</button>
+                
+                <p id="solicitud" class="solicitud"></p>
+                
+            </form>
+
+            <section class="administradores">
+                <label for="btn-item" class="btn-item">INGRESAR COMO ADMINISTRADOR</label>
+                <input type="checkbox" id="btn-item">
+                <div class="form-admin">
+                    <label for="usuario" class="usuario">Usuario:</label>
+                    <input type="text" name="usuario" id="usuario">
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="text" name="contrasena" id="contrasena">
+                    <button id="btn-ingre" onclick="ingresarAdministrador()">INGRESAR</button>
+                </div>
+                <div id="func-admin" class="funcAdminInactivo">
+                    <button class="admin">LISTAR COTIZACIONES</button>
+                    <button class="admin">MODIFICAR COTIZACIÓN</button>
+                    <button class="admin">ELIMINAR COTIZACIÓN</button>
+                </div>
+            </section>
+            
+            <section>
+                <h2 class="h2">Conoce más sobre las comodidades que podemos ofrecerte!</h2>
+                <div class="contenedor-gastro">
+                    <div class="img-container">
+                        <img src="img/categories-bg-01.jpg" alt="" class="image-gastro">
+                        <div class="">
+                        </div>
+                    </div>
+                    <div class="img-container">
+                        <img src="img/categories-bg-02.jpg" alt="" class="image-gastro">
+                        <div class="">
+                        </div>
+                    </div>
+                    <div class="img-container">
+                        <img src="img/categories-bg-06.jpg" alt="" class="image-gastro">
+                        <div class="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="ubicacion" id="ubicacion">
+                <h2 class="h2">¿Dónde se encuentra este paraíso?</h2>
+                <iframe class="iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d836.5288445703059!2d73.5173914857287!3d4.176277503699527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b3f7fdb37d8f58b%3A0x7a40fb9580738b51!2sArcanum%20Maldives!5e0!3m2!1ses!2sar!4v1715548334546!5m2!1ses!2sar"  height="300" style="border:0;  width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+
+            <section class="gastro">
+                <h2 class="h2">Disfruta de una gastronomía de escelencia!</h2>
+                <div class="contenedor-gastro">
+                    <div class="img-container">
+                        <img src="img/desayuno3.jpg" alt="" class="image-gastro">
+                        <div class="">
+                        </div>
+                    </div>
+                    <div class="img-container">
+                        <img src="img/desayuno1.jpg" alt="" class="image-gastro">
+                        <div class="">
+                        </div>
+                    </div>
+                    <div class="img-container">
+                        <img src="img/desayuno2.jpg" alt="" class="image-gastro">
+                        <div class="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section>
+                <div class="bg-img">
+                    <img src="img/20.jpg" alt="Imagen de costa" class="bg">
+                    <h1>Encuentra los mejores servicios en el mejor lugar!</h1>
+                    <img src="img/home-bg-20.png" alt="Imagenes de costa" class="bg-flotante">
+                </div>
+            </section>
+
+            <section id="info-extra">
+                <strong>Para disfrutar de la mejor escapada, reserva una suite espaciosa con balcón privado y vistas impresionantes. </strong>
+                <strong>Algunas suites incluso ofrecen acceso directo a la playa, una exclusiva cabaña de playa designada y un descuento en tratamientos de spa.</strong>
+            </section>
+
+        </main>
+        
+        <footer id="footer" class="footer">
+        </footer>
+
+    </div>
+        
+    <script>
+        
+        // Capturamos el evento de envío del formulario
+        document.getElementById('formulario').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitamos que se envie el form 
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //definimos variables de datos necesarias
+    let checkin = new Date(document.getElementById("checkin").value)
+    let checkout = new Date(document.getElementById("checkout").value)
+    let fechaActual = new Date()
+    
+    let tipoHabitacion =  document.getElementById("tipoHabitacion").value
+    let cantidadAdultos = document.getElementById("cantidadAdultos").value
+    let cantidadMenores = document.getElementById("cantidadMenores").value
+    let cantidadHabitaciones = document.getElementById("cantidadHabitaciones").value
+    
+    let email = document.getElementById("email").value
+    
+    //realizamos validación de email con expresión regular
+    function validarmail(email) {
+        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+        return regex.test(email)
+    }
+    
+    //realizamos validación de formulario(fechas y mail correctos, y resto de los campos completados)
+    
+    
+    if ( checkin <= fechaActual || checkout <= checkin || isNaN(checkout) || isNaN(checkin) ) {
+        document.getElementById("solicitud").textContent = 
+        `Verifique las fechas ingresadas`
+    } else if (tipoHabitacion === "" ) {
+        document.getElementById("solicitud").textContent = 
+        `Debe seleccionar un tipo de habitación`
+    } else if (cantidadAdultos <= "0" || cantidadMenores < "0" ) {
+        document.getElementById("solicitud").textContent = 
+        `Verifique las cantidades de huespedes ingresadas`
+    } else if (cantidadHabitaciones <= "0" ) {
+        document.getElementById("solicitud").textContent = 
+        `La cantidad de habitaciones debe ser mayor a 0`
+    } else if (validarmail(email) === false ){
+        document.getElementById("solicitud").textContent = 
+        `El email no es valido`
+    } else {
+        
+        
+        
+        
+        
+        
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// const URL = "http://127.0.0.1:5000/"
+const URL = "http://127.0.0.1:5000/"
+
+//Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+//const URL = "https://USUARIO.pythonanywhere.com/"
+
+        var formData = new FormData(this);
+
+        // Realizamos la solicitud POST al servidor
+        fetch(URL + 'cotizaciones', {
+            method: 'POST',
+            body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+        })
+
+        //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
+        .then(function (response) {
+                if (response.ok) { 
+                    //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                    // linea = 1010
+                    return response.json(); 
+                } else {
+                    // Si hubo un error, lanzar explícitamente una excepción
+                    // para ser "catcheada" más adelante
+                    // linea = 1020
+                    alert("Error1")
+                    throw new Error('Error al agregar la cotizacion.');
+                }
+        })
+
+            //Respuesta OK, muestra una alerta informando que el cotizacion se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo cotizacion.
+            .then(function (data) {
+                document.getElementById("solicitud").innerHTML = `
+                Solicitud enviada correctamente.</br>
+                El presupuesto llegará al e-mail proporcionado.`
+                alert('Cotizacion agregada correctamente.');
+            })
+
+            // En caso de error, mostramos una alerta con un mensaje de error.
+            .catch(function (error) {
+                alert(`Error al agregar la cotización.`);
+
+            })
+            
+            // Limpiar el formulario en ambos casos (éxito o error)
+            .finally(function () {
+            //limpiamos los inputs del formulario
+                document.getElementById("checkin").value = ""
+                document.getElementById("checkout").value = ""
+                document.getElementById("tipoHabitacion").value = ""
+                document.getElementById("cantidadAdultos").value = ""
+                document.getElementById("cantidadMenores").value = ""
+                document.getElementById("cantidadHabitaciones").value = ""
+                document.getElementById("email").value = ""
+                });
+    }
+})
+
+
+            // Ingresar como administrador
+            function ingresarAdministrador() {
+        //definimos variables de datos necesarias
+        const contraCorrecta = "admin2024"
+        const usuario = document.getElementById("usuario").value
+        const contraIngresada = document.getElementById("contrasena").value
+        // const contraSs = sessionStorage.getItem("ContraseñaIngresada")
+        const seccionAdmin = document.getElementById("func-admin")
+        
+        // //definimos y asignasmos valores a Usurario y Contrasseña en sS
+        // sessionStorage.setItem("Usuario", usuario)
+        // sessionStorage.setItem("ContraseñaIngresada", contraIngresada) 
+        
+        //llamamos a la funcion que agrega o remueve la clase del div, según si la contraseña coincide o no (pasandole los parametros que necesita)
+        compararSs(contraCorrecta, contraIngresada, seccionAdmin)
+    }
+
+    function compararSs(contraCorrecta, contraIngresada, seccionAdmin) {
+        // si la contraseña de sessionstorage es igual a la contraCorrecta, quitamos la clase con display none, sino la agregamos.
+        if (contraCorrecta === contraIngresada) {
+            seccionAdmin.classList.remove("funcAdminInactivo")
+        } else {
+            seccionAdmin.classList.add("funcAdminInactivo")
+        }
+    }
+
+    // // Asignamos el evento al botón
+    // document.getElementById("btn-ingre").addEventListener("click", ingresarAdministrador);
+
+
+    </script>
+</body>
+</html>
