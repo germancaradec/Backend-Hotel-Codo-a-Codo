@@ -5,21 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Productos 🚀</title>
+    <title>Listado de Cotizaciones</title>
     <link rel="stylesheet" href="./static/css/estilos.css">
+    <link rel="shortcut icon" href="static/imagenes/hotel.png" type="image/x-icon">
 </head>
 
 <body>
     <header>
         <nav class="navbar-index ">
-            <img class="logo-nav" src="./static/imagenes/logos-nav.webp" alt="logo agencia de aprendizaje">
+            <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
         </nav>
     </header>
 
     <div class="logo-centrado">
-        <img src="./static/imagenes/logo_Codo.jpg" alt="logo">
+       <img src="./static/imagenes/logo_Codo.jpg" alt="logo">
     </div>
-    <h1>Listado de Productos del Inventario</h1><br>
+    <h1>Listado de Cotizaciones</h1><br>
 
     <table> <!-- Se crea una tabla para mostrar los cotizaciones. -->
         <thead> <!--Encabezado de la tabla con columnas para código, descripción, cantidad, precio y acciones.-->
@@ -69,14 +70,14 @@
                 for (let cotizacion of data) {
                     let fila = document.createElement('tr'); //Crea una nueva fila de tabla (<tr>) para cada cotizacion.
                     fila.innerHTML = 
-                        '<td>' + cotizacion.codigo + '</td>' +
-                        '<td>' + cotizacion.checkin + '</td>' +
-                        '<td >' + cotizacion.checkout + '</td>' +
-                        '<td >' + cotizacion.tipoHabitacion + '</td>' +
-                        '<td >' + cotizacion.cantidadAdultos + '</td>' +
-                        '<td >' + cotizacion.cantidadMenores + '</td>' +
-                        '<td >' + cotizacion.cantidadHabitaciones + '</td>' +
-                        '<td >' + cotizacion.email + '</td>';
+                        '<td align="center">' + cotizacion.codigo + '</td>' +
+                        '<td align="center">' + fechaTruncada(cotizacion.checkin) + '</td>' +
+                        '<td align="center">' + fechaTruncada(cotizacion.checkout) + '</td>' +
+                        '<td align="center">' + cotizacion.tipoHabitacion + '</td>' +
+                        '<td align="center">' + cotizacion.cantidadAdultos + '</td>' +
+                        '<td align="center">' + cotizacion.cantidadMenores + '</td>' +
+                        '<td align="center">' + cotizacion.cantidadHabitaciones + '</td>' +
+                        '<td align="center">' + cotizacion.email + '</td>';
 
                         // Mostrar miniatura de la imagen
                         // '<td><img src=./static/imagenes/' + cotizacion.imagen_url +' alt="Imagen del cotizacion" style="width: 100px;"></td>' + '<td align="right">' + cotizacion.proveedor + '</td>';
@@ -95,6 +96,21 @@
                 // Código para manejar errores
                 alert('Error al obtener las cotizaciones.');
             });
+        function fechaTruncada(fechaParam) {
+          // Crear una nueva fecha
+          var fecha = new Date(fechaParam);
+
+          // Obtener solo la parte de la fecha deseada
+          const dia = String(fecha.getDate()).padStart(2, '0');
+          const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses en JavaScript van de 0 a 11
+          const año = fecha.getFullYear();
+
+          // Formatear la fecha DD/MM/YYYY
+          const fechaTrunc = `${dia}/${mes}/${año}`;
+          return fechaTrunc;
+        }
+
+
     </script>
 </body>
 </html>

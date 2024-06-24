@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliminar Cotizaciones 🚀</title>
+    <title>Eliminar Cotizaciones</title>
+    <link rel="shortcut icon" href="static/imagenes/hotel.png" type="image/x-icon">
     <link rel="stylesheet" href="./static/css/estilos.css">
 </head>
 
 <body>
     <header>
         <nav class="navbar-index">
-            <img class="logo-nav" src="./static/imagenes/logos-nav.webp" alt="logo agencia de aprendizaje">
+            <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
         </nav>
     </header>
 
@@ -61,15 +62,15 @@
                     data.forEach(cotizacion => {
                         const row = cotizacionesTable.insertRow();
                         row.innerHTML = `
-                            <td>${cotizacion.codigo}</td>
-                            <td>${cotizacion.checkin}</td>
-                            <td>${cotizacion.checkout}</td>
-                            <td>${cotizacion.tipoHabitacion}</td>
-                            <td>${cotizacion.cantidadAdultos}</td>
-                            <td>${cotizacion.cantidadMenores}</td>
-                            <td>${cotizacion.cantidadHabitaciones}</td>
-                            <td>${cotizacion.email}</td>
-                            <td><button onclick="eliminarCotizacion('${cotizacion.codigo}')">Eliminar</button></td>
+                            <td align="center">${cotizacion.codigo}</td>
+                            <td align="center">${fechaTruncada(cotizacion.checkin)}</td>
+                            <td align="center">${fechaTruncada(cotizacion.checkout)}</td>
+                            <td align="center">${cotizacion.tipoHabitacion}</td>
+                            <td align="center">${cotizacion.cantidadAdultos}</td>
+                            <td align="center">${cotizacion.cantidadMenores}</td>
+                            <td align="center">${cotizacion.cantidadHabitaciones}</td>
+                            <td align="center">${cotizacion.email}</td>
+                            <td align="center"><button onclick="eliminarCotizacion('${cotizacion.codigo}')">Eliminar</button></td>
                         `;
                     });
                 })
@@ -97,6 +98,19 @@
                         alert(error.message);
                     });
             }
+        }
+        function fechaTruncada(fechaParam) {
+          // Crear una nueva fecha
+          var fecha = new Date(fechaParam);
+
+          // Obtener solo la parte de la fecha deseada
+          const dia = String(fecha.getDate()).padStart(2, '0');
+          const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses en JavaScript van de 0 a 11
+          const año = fecha.getFullYear();
+
+          // Formatear la fecha DD/MM/YYYY
+          const fechaTrunc = `${dia}/${mes}/${año}`;
+          return fechaTrunc;
         }
 
         // Cuando la página se carga, llama a obtenerCotizaciones para cargar la lista de cotizaciones.
