@@ -86,9 +86,9 @@
                     <button id="btn-ingre" onclick="ingresarAdministrador()">INGRESAR</button>
                 </div>
                 <div id="func-admin" class="funcAdminInactivo">
-                    <button class="admin">LISTAR COTIZACIONES</button>
-                    <button class="admin">MODIFICAR COTIZACIÓN</button>
-                    <button class="admin">ELIMINAR COTIZACIÓN</button>
+                    <a href="listado.html"> <button class="admin" >LISTAR COTIZACIONES</button> </a>
+                    <a href="modificaciones.html"> <button class="admin">MODIFICAR COTIZACIÓN</button></a>
+                    <a href="listadoEliminar.html"> <button class="admin">ELIMINAR COTIZACIÓN</button></a>
                 </div>
             </section>
             
@@ -273,8 +273,8 @@ const URL = "http://127.0.0.1:5000/"
 })
 
 
-            // Ingresar como administrador
-            function ingresarAdministrador() {
+    // Ingresar como administrador
+    function ingresarAdministrador() {
         //definimos variables de datos necesarias
         const contraCorrecta = "admin2024"
         const usuario = document.getElementById("usuario").value
@@ -283,8 +283,8 @@ const URL = "http://127.0.0.1:5000/"
         const seccionAdmin = document.getElementById("func-admin")
         
         // //definimos y asignasmos valores a Usurario y Contrasseña en sS
-        // sessionStorage.setItem("Usuario", usuario)
-        // sessionStorage.setItem("ContraseñaIngresada", contraIngresada) 
+         sessionStorage.setItem("Usuario", usuario)
+         sessionStorage.setItem("ContraseñaIngresada", contraIngresada) 
         
         //llamamos a la funcion que agrega o remueve la clase del div, según si la contraseña coincide o no (pasandole los parametros que necesita)
         compararSs(contraCorrecta, contraIngresada, seccionAdmin)
@@ -292,8 +292,10 @@ const URL = "http://127.0.0.1:5000/"
 
     function compararSs(contraCorrecta, contraIngresada, seccionAdmin) {
         // si la contraseña de sessionstorage es igual a la contraCorrecta, quitamos la clase con display none, sino la agregamos.
-        if (contraCorrecta === contraIngresada) {
+       esAdmin = sessionStorage.getItem("EsAdmin") 
+        if (contraCorrecta === contraIngresada || esAdmin )  {
             seccionAdmin.classList.remove("funcAdminInactivo")
+            sessionStorage.setItem("EsAdmin", true)
         } else {
             seccionAdmin.classList.add("funcAdminInactivo")
         }
