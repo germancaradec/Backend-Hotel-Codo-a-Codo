@@ -68,7 +68,7 @@ class CotizacionesGR:
 
     def consultar_cotizacion(self, codigo):
         # Consultamos una cotización a partir de su codigo
-        self.cursor.execute(f"SELECT * FROM cotizaciones WHERE codigo = {codigo}")
+        self.cursor.execute(f"SELECT * FROM cotizaciones WHERE codigo = {codigo} ")
         return self.cursor.fetchone()
     
     def mostrar_cotizacion(self, codigo):
@@ -89,7 +89,7 @@ class CotizacionesGR:
             print("Cotización no encontrada.")
         
     def listar_cotizaciones(self):
-        self.cursor.execute("SELECT * FROM cotizaciones")
+        self.cursor.execute("SELECT * FROM cotizaciones order by checkin desc")
         cotizaciones = self.cursor.fetchall()
         return cotizaciones
 

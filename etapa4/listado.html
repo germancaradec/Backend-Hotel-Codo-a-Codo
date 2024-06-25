@@ -98,8 +98,10 @@
             });
         function fechaTruncada(fechaParam) {
           // Crear una nueva fecha
-          var fecha = new Date(fechaParam);
-
+          var diferencia = 1000 * 60 * 60 * 3 * 1;
+          var fecha1 = new Date(fechaParam);
+          var fecha = new Date(fecha1.getTime() + (diferencia)); // agregado de 3 horas para que sea de argentina
+      
           // Obtener solo la parte de la fecha deseada
           const dia = String(fecha.getDate()).padStart(2, '0');
           const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses en JavaScript van de 0 a 11
