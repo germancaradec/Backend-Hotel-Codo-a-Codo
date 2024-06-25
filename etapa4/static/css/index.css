@@ -17,7 +17,7 @@ header{
     height: 850px;
     width: 100vw;
     background: linear-gradient(rgba(5, 7, 12, 0.5),rgba(5, 7, 12, 0.5)),
-    url('/img/header4.png');
+    url('../imagenes/header4.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -152,7 +152,7 @@ header{
     padding: 60px 40px;
     display: grid;
     grid-gap: 25px;
-    grid-template-areas: 'titulo titulo check-in-label  check-out-label tipoHabitacion-label'
+    grid-template-areas:'titulo titulo check-in-label  check-out-label tipoHabitacion-label'
                         'titulo titulo check-in-input  check-out-input tipoHabitacion-input'
                         'titulo titulo adultos-label menores-label habitaciones-label'
                         '. . adultos-input menores-input habitaciones-input'
@@ -188,7 +188,7 @@ header{
 .check-in{
     grid-area: check-in-label;
 }
-#check-in{
+#checkin{
     grid-area: check-in-input;
 }
 
@@ -197,7 +197,7 @@ header{
     
 }
 
-#check-out{
+#checkout{
     grid-area: check-out-input;
     
 }
@@ -217,7 +217,7 @@ header{
     
 }
 
-#adultos{
+#cantidadAdultos{
     grid-area: adultos-input;
     
 }
@@ -227,7 +227,7 @@ header{
     
 }
 
-#menores{
+#cantidadMenores{
     grid-area: menores-input;
     
 }
@@ -237,7 +237,7 @@ header{
     
 }
 
-#habitaciones{
+#cantidadHabitaciones{
     grid-area: habitaciones-input;
     
 }
@@ -352,7 +352,7 @@ header{
     align-items: center;
     height: 450px;
     background: #000;
-    background:url('/img/footer2.png');
+    background:url('../imagenes/footer2.png');
     background-size: cover;
     background-repeat: no-repeat;
 
