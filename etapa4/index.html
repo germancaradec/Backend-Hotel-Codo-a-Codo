@@ -65,6 +65,8 @@
                     <label for="contrasena">Contraseña:</label>
                     <input type="text" name="contrasena" id="contrasena">
                     <button id="btn-ingre" onclick="ingresarAdministrador()">INGRESAR</button>
+                    <button id="btn-ingre" onclick="salirAdministrador()">Logout</button>
+
                 </div>
                 <div id="func-admin" class="funcAdminInactivo">
                     <a href="listado.html"> <button class="admin">LISTAR COTIZACIONES</button></a>
@@ -290,18 +292,20 @@ const URL = "http://127.0.0.1:5000/"
 })
 
 
+
+
     // Ingresar como administrador
     function ingresarAdministrador() {
         //definimos variables de datos necesarias
         const contraCorrecta = "admin2024"
         const usuario = document.getElementById("usuario").value
         const contraIngresada = document.getElementById("contrasena").value
-        // const contraSs = sessionStorage.getItem("ContraseñaIngresada")
+        // const contraSs = localStorage.getItem("ContraseñaIngresada")
         const seccionAdmin = document.getElementById("func-admin")
         
         // //definimos y asignasmos valores a Usurario y Contrasseña en sS
-        sessionStorage.setItem("Usuario", usuario)
-        sessionStorage.setItem("ContraseñaIngresada", contraIngresada) 
+        localStorage.setItem("Usuario", usuario)
+        localStorage.setItem("ContraseñaIngresada", contraIngresada) 
         
         //llamamos a la funcion que agrega o remueve la clase del div, según si la contraseña coincide o no (pasandole los parametros que necesita)
         compararSs(contraCorrecta, contraIngresada, seccionAdmin)
@@ -309,30 +313,60 @@ const URL = "http://127.0.0.1:5000/"
 
     function compararSs(contraCorrecta, contraIngresada, seccionAdmin) {
         // si la contraseña de sessionstorage es igual a la contraCorrecta, quitamos la clase con display none, sino la agregamos.
-        esAdmin = sessionStorage.getItem("EsAdmin") 
-        if (contraCorrecta === contraIngresada || esAdmin )  {
+        esAdmin = localStorage.getItem('EsAdmin') 
+        console.log('comparass  ES '+ localStorage.getItem('EsAdmin')  )
+        console.log('contraCorrecta  ES '+ contraCorrecta  )
+        console.log('contraIngresada  ES '+ contraIngresada  )
+        if ((contraCorrecta === contraIngresada))  {
+           console.log('verdadero comp')
+        }    
+        if (esAdmin)  {
+           console.log('verdadero esadmin')
+        }    
+
+        if ((contraCorrecta === contraIngresada) || esAdmin===true )  {
             seccionAdmin.classList.remove("funcAdminInactivo")
-            sessionStorage.setItem("EsAdmin", true)
-            console.log ('ver ' + esAdmin);
+          
+            esAdmin = localStorage.getItem('EsAdmin') 
+            console.log ('ver v ' + esAdmin);
+            localStorage.setItem('EsAdmin', true);
 
         } else {
             seccionAdmin.classList.add("funcAdminInactivo")
-            sessionStorage.setItem("EsAdmin", false)
+            localStorage.setItem('EsAdmin', false);
+            
+            esAdmin = localStorage.getItem('EsAdmin') 
+            console.log ('ver f ' + esAdmin);
         }
     }
+    function salirAdministrador(){
+        
+        var esAdmin = localStorage.getItem('EsAdmin') 
+        console.log ('ver 1 ' + esAdmin);
+       
+        const seccionAdmin = document.getElementById("func-admin")    
+        seccionAdmin.classList.add("funcAdminInactivo")
+        localStorage.setItem('EsAdmin', false);
+        
+        esAdmin = localStorage.getItem('EsAdmin') 
+        console.log ('ver 2 ' + esAdmin);
+
+    }
+
 
     // // Asignamos el evento al botón
     // document.getElementById("btn-ingre").addEventListener("click", ingresarAdministrador);
 
         function  esAdministrador(){
           const seccionAdmin = document.getElementById("func-admin")  
-          var esAdmin = sessionStorage.getItem("EsAdmin") 
-          if ( esAdmin )  {
+          var esAdmin = localStorage.getItem('EsAdmin') 
+          if ( esAdmin===true )  {
             seccionAdmin.classList.remove("funcAdminInactivo")
-            console.log ('ver ' + esAdmin);
+            console.log ('ver x ' + localStorage.getItem('EsAdmin'));
           } else {
-            seccionAdmin.classList.add("funcAdminInactivo")
-            sessionStorage.setItem("EsAdmin", false)
+            seccionAdmin.classList.add("funcAdminInactivo");
+            localStorage.setItem('EsAdmin', false);
+            console.log ('ver y ' + localStorage.getItem('EsAdmin'));
           }
         }
 

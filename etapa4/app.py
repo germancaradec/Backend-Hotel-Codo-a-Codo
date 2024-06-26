@@ -43,7 +43,7 @@ class CotizacionesGR:
                 raise err
             
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS cotizaciones (
-            codigo INT AUTO_INCREMENT PRIMARY KEY, checkin DATE NOT NULL, checkout DATE NOT NULL, tipoHabitacion VARCHAR(20) NOT NULL, cantidadAdultos INT NOT NULL, cantidadMenores INT NOT NULL, cantidadHabitaciones INT NOT NULL, email VARCHAR(40));''')
+            codigo INT AUTO_INCREMENT PRIMARY KEY, checkin DATE NOT NULL, checkout DATE NOT NULL, tipoHabitacion VARCHAR(20) NOT NULL, cantidadAdultos INT NOT NULL, cantidadMenores INT NOT NULL, cantidadHabitaciones INT NOT NULL, email VARCHAR(40) , asignada VARCHAR(2)  DEFAULT 'NO' );''')
         self.conn.commit()
 
         # Cerrar el cursor inicial y abrir uno nuevo con diccionario = true
@@ -59,9 +59,9 @@ class CotizacionesGR:
         self.conn.commit()
         return self.cursor.lastrowid
     
-    def modificar_cotizacion(self, codigo, nuevo_checkin, nuevo_checkout, nuevo_tipoHabitacion, nueva_cantidadAdultos, nueva_cantidadMenores, nueva_cantidadHabitaciones, nuevo_email):
-        sql = "UPDATE cotizaciones SET checkin = %s, checkout = %s, tipoHabitacion = %s, cantidadAdultos = %s, cantidadMenores = %s, cantidadHabitaciones = %s, email = %s WHERE codigo = %s"
-        valores = (nuevo_checkin, nuevo_checkout, nuevo_tipoHabitacion, nueva_cantidadAdultos, nueva_cantidadMenores, nueva_cantidadHabitaciones, nuevo_email, codigo)
+    def modificar_cotizacion(self, codigo, nuevo_checkin, nuevo_checkout, nuevo_tipoHabitacion, nueva_cantidadAdultos, nueva_cantidadMenores, nueva_cantidadHabitaciones, nuevo_email, nuevo_asignada):
+        sql = "UPDATE cotizaciones SET checkin = %s, checkout = %s, tipoHabitacion = %s, cantidadAdultos = %s, cantidadMenores = %s, cantidadHabitaciones = %s, email = %s , asignada = %s WHERE codigo = %s"
+        valores = (nuevo_checkin, nuevo_checkout, nuevo_tipoHabitacion, nueva_cantidadAdultos, nueva_cantidadMenores, nueva_cantidadHabitaciones, nuevo_email,nuevo_asignada, codigo)
         self.cursor.execute(sql, valores)
         self.conn.commit()
         return self.cursor.rowcount > 0
@@ -89,7 +89,7 @@ class CotizacionesGR:
             print("Cotización no encontrada.")
         
     def listar_cotizaciones(self):
-        self.cursor.execute("SELECT * FROM cotizaciones order by checkin desc")
+        self.cursor.execute("SELECT * FROM cotizaciones order by asignada, checkin desc, checkout desc")
         cotizaciones = self.cursor.fetchall()
         return cotizaciones
 
@@ -156,6 +156,7 @@ def modificar_cotizacion(codigo):
     cantidadMenores = request.form.get("cantidadMenores")
     cantidadHabitaciones = request.form.get("cantidadHabitaciones")
     email = request.form.get("email")
+    asignada = request.form.get("asignada")
     
     # # Verifica si se proporcionó una nueva imagen
     # if 'imagen' in request.files:
@@ -185,7 +186,7 @@ def modificar_cotizacion(codigo):
 
 
     # Se llama al método modificar_cotizacion pasando el codigo del cotizacion y los nuevos datos.
-    if cotizacionesGR.modificar_cotizacion(codigo, checkin, checkout, tipoHabitacion, cantidadAdultos, cantidadMenores, cantidadHabitaciones, email):
+    if cotizacionesGR.modificar_cotizacion(codigo, checkin, checkout, tipoHabitacion, cantidadAdultos, cantidadMenores, cantidadHabitaciones, email, asignada):
         return jsonify({"mensaje": "Cotizacion modificada"}), 200
     else:
         return jsonify({"mensaje": "Cotizacion no encontrada"}), 403
