@@ -89,7 +89,7 @@ class CotizacionesGR:
             print("Cotización no encontrada.")
         
     def listar_cotizaciones(self):
-        self.cursor.execute("SELECT * FROM cotizaciones order by asignada, checkin desc, checkout desc")
+        self.cursor.execute("SELECT * FROM cotizaciones order by checkin desc, checkout desc")
         cotizaciones = self.cursor.fetchall()
         return cotizaciones
 

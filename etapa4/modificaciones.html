@@ -18,9 +18,9 @@
     </header>
 
     <div class="logo-centrado">
-        <img src="./static/imagenes/logo_Codo.jpg" alt="logo">
+        <h1>ADMINISTRACIÓN</h1>
     </div>
-    <h1>Modificar cotizacions del Inventario</h1><br>
+    <h3>Modificar Cotizaciones del inventario</h3><br>
 
     <!-- Contenedor principal que será controlado por JavaScript. Este contenedor tendrá dos formularios. -->
     <div id="app">
@@ -28,12 +28,13 @@
         <form id="form-obtener-cotizacion">
             <label for="codigo">Código:</label>
             <input type="text" id="codigo" required><br>
-            <button type="submit">Modificar cotizacion</button> <a href="index.html">Menu principal</a>
+            <button type="submit" class="boton2-form">Modificar cotizacion</button> 
+            <a href="index.html" class="boton3-form">Menu principal</a>
         </form>
 
         <!-- Segundo formulario: se muestra solo si mostrarDatosCotizacion es verdadero. Llama a la función guardarCambios -->
         <div id="datos-cotizacion" style="display: none;">
-            <h2>Datos del cotizacion</h2>
+            <h2>Datos de la cotizacion</h2>
             <form id="form-guardar-cambios">
                 <label for="checkin" class="check-in">Check-in:</label>
                 <input type="date" name="checkin" id="checkin">
@@ -70,12 +71,31 @@
                 </select>
 
 
-                <button type="submit">Guardar Cambios</button>
-                <a href="modificaciones.html">Cancelar</a>
+                <button type="submit" class="boton2-form">Guardar Cambios</button>
+                <a href="modificaciones.html" class="boton3-form">Cancelar</a>
             </form>
         </div>
     </div>
+
+    <footer class="footer" id="footer"></footer>
     <script>
+
+
+        //armamos bloque footer
+        let footer =`
+            <a href="#header"><img src="static/imagenes/logo-negro-furaveri.png" alt="Logo Hotel" class="logo-footer"></a>
+            <section class="social">
+                <a href="https://www.facebook.com/" target="_blank"><img src="static/imagenes/facebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="static/imagenes/instagram.png" alt="Instagram"></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="static/imagenes/twitter.png" alt="Twitter"></a>
+                <a href="https://www.whatsapp.com/" target="_blank"><img src="static/imagenes/whatsapp.png" alt="Watsapp"></a>
+            </section>
+        `;
+        document.getElementById("footer").innerHTML = footer
+
+
+
+
         const URL = "http://127.0.0.1:5000/"
         // const URL = "https://juanpablocodo.pythonanywhere.com/"
 
@@ -202,16 +222,16 @@
                     if (response.ok) {
                         return response.json()
                     } else {
-                        throw new Error('Error al guardar los cambios del cotizacion.')
+                        throw new Error('Error al guardar los cambios de la cotizacion.')
                     }
                 })
                 .then(data => {
-                    alert('Cotizacion actualizado correctamente.');
+                    alert('Cotizacion actualizada correctamente.');
                     // limpiarFormulario();
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error al actualizar el cotizacion.');
+                    alert('Error al actualizar la cotizacion.');
                 });
         }
 

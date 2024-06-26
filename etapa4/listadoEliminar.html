@@ -12,15 +12,15 @@
 
 <body>
     <header>
-        <nav class="navbar-index">
+        <nav class="navbar-index ">
             <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
         </nav>
     </header>
 
     <div class="logo-centrado">
-        <img src="./static/imagenes/logo_Codo.jpg" alt="logo">
+        <h1>ADMINISTRACIÓN</h1>
     </div>
-    <h1>Eliminar Cotizaciones</h1><br>
+    <h3>Eliminar Cotizaciones del inventario</h3><br>
 
     <table id="cotizaciones-table"> <!-- Se crea una tabla para mostrar los cotizaciones. -->
         <thead> <!--Encabezado de la tabla con columnas para código, descripción, cantidad, precio y acciones.-->
@@ -41,9 +41,26 @@
     </table><br>
 
     <div class="contenedor-centrado">
-        <a href="index.html">Menu principal</a>
+        <a href="index.html" class="boton-form">Menu principal</a>
     </div>
+    <footer class="footer" id="footer"></footer>
     <script>
+
+
+        //armamos bloque footer
+        let footer =`
+            <a href="#header"><img src="static/imagenes/logo-negro-furaveri.png" alt="Logo Hotel" class="logo-footer"></a>
+            <section class="social">
+                <a href="https://www.facebook.com/" target="_blank"><img src="static/imagenes/facebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="static/imagenes/instagram.png" alt="Instagram"></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="static/imagenes/twitter.png" alt="Twitter"></a>
+                <a href="https://www.whatsapp.com/" target="_blank"><img src="static/imagenes/whatsapp.png" alt="Watsapp"></a>
+            </section>
+        `;
+        document.getElementById("footer").innerHTML = footer
+
+
+
         const URL = "http://127.0.0.1:5000/"
         // const URL = "https://juanpablocodo.pythonanywhere.com/"
 
@@ -70,7 +87,7 @@
                             <td align="center">${cotizacion.cantidadMenores}</td>
                             <td align="center">${cotizacion.cantidadHabitaciones}</td>
                             <td align="center">${cotizacion.email}</td>
-                            <td align="center"><button onclick="eliminarCotizacion('${cotizacion.codigo}')">Eliminar</button></td>
+                            <td align="center"><button class="boton2-form" onclick="eliminarCotizacion('${cotizacion.codigo}')">Eliminar</button></td>
                         `;
                     });
                 })
