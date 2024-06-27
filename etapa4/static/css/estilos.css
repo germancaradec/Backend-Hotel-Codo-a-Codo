@@ -75,6 +75,7 @@ table {
     margin: 0 auto;
     padding: 20px;
     background-color: #292929;
+    color: white;
 }
 
 label {
@@ -148,6 +149,26 @@ input[type="submit"]:hover {
     scale: 1.05;
 }
 
+.boton1-form{
+    font-size: 1rem;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    padding: 20px 15px;
+    background: #212121;
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgb(129, 129, 129);
+}
+
+.boton1-form:hover{
+    border: 1.5px solid white;
+    background: #3c3c3c;
+    cursor: pointer;
+    scale: 1.05;
+}
+
+
 .boton2-form{
     font-size: 1rem;
     width: 100%;
@@ -161,7 +182,7 @@ input[type="submit"]:hover {
 }
 
 .boton2-form:hover{
-    background: #db2c2c;
+    background: #2c8cdb;
     cursor: pointer;
     scale: 1.05;
     border: 1.5px solid white;
@@ -179,8 +200,27 @@ input[type="submit"]:hover {
     border: 1px solid rgb(129, 129, 129);
 }
 
-.boton2-form:hover{
-    background: #db2c2c;
+.boton3-form:hover{
+    background: #4a4a4a;
+    cursor: pointer;
+    scale: 1.05;
+    border: 1.5px solid white;
+}
+
+.boton4-form{
+    font-size: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5px 10px;
+    background: #212121;
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgb(129, 129, 129);
+}
+
+.boton4-form:hover{
+    background: #ff2f2f;
     cursor: pointer;
     scale: 1.05;
     border: 1.5px solid white;
