@@ -325,30 +325,10 @@ const URL = "http://127.0.0.1:5000/"
     function compararSs(contraCorrecta, contraIngresada, seccionAdmin) {
         // si la contraseña de sessionstorage es igual a la contraCorrecta, quitamos la clase con display none, sino la agregamos.
         esAdmin = localStorage.getItem('EsAdmin') 
-        console.log('comparass  ES '+ localStorage.getItem('EsAdmin')  )
-        console.log('contraCorrecta  ES '+ contraCorrecta  )
-        console.log('contraIngresada  ES '+ contraIngresada  )
-        if ((contraCorrecta === contraIngresada))  {
-            console.log('verdadero comp')
-        }    
-        if (esAdmin)  {
-            console.log('verdadero esadmin')
-        }    
 
         if ((contraCorrecta === contraIngresada) || esAdmin===true )  {
-            seccionAdmin.classList.remove("funcAdminInactivo")
-        
-            esAdmin = localStorage.getItem('EsAdmin') 
-            console.log ('ver v ' + esAdmin);
-            localStorage.setItem('EsAdmin', true);
-
-        } else {
-            seccionAdmin.classList.add("funcAdminInactivo")
-            localStorage.setItem('EsAdmin', false);
-            
-            esAdmin = localStorage.getItem('EsAdmin') 
-            console.log ('ver f ' + esAdmin);
-        }
+            window.location.href = 'listadoCotizaciones.html';
+        } 
     }
     // function salirAdministrador(){
         

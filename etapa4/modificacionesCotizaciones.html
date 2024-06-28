@@ -14,7 +14,7 @@
     <header class="navbar-index">
         <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
         <section class="nav">
-            <h2>ADMINISTRAR COTIZACIONES</h2>
+          
             <nav id="func-admin" class="funcAdminInactivo">
                 <a href="listadoCotizaciones.html"> 
                     <button class="boton-header">LISTAR COTIZACIONES</button>
@@ -24,6 +24,17 @@
                 </a>
                 <a href="listadoEliminarCotizaciones.html"> 
                     <button class="boton-header">ELIMINAR COTIZACIÓN</button>
+                </a>
+            </nav>
+            <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoConsultas.html"> 
+                    <button class="boton-header">LISTAR CONSULTAS</button>
+                </a>
+                <a href="modificaciones.Consultas.html"> 
+                    <button class="boton-header">MODIFICAR CONSULTAS</button>
+                </a>
+                <a href="listadoEliminarConsultas.html"> 
+                    <button class="boton-header">ELIMINAR CONSULTAS</button>
                 </a>
             </nav>
         </section>
@@ -117,8 +128,8 @@
 
         // Variables de estado para controlar la visibilidad y los datos del formulario
         let codigo = '';
-        let checkin = '';
-        let checkout = '';
+        let checkin1 = '';
+        let checkout1 = '';
         let tipoHabitacion = '';
         let cantidadAdultos = '';
         let cantidadMenores = '';
@@ -136,7 +147,7 @@
         function obtenerCotizacion(event) {
             event.preventDefault();
             codigo = document.getElementById('codigo').value;
-            alert(`codigo: ${codigo}`);
+            //alert(`codigo: ${codigo}`);
             fetch(URL + 'cotizaciones/' + codigo)
                 .then(response => {
                     if (response.ok) {
@@ -145,9 +156,10 @@
                         throw new Error('Error al obtener los datos del cotizacion.')
                     }
                 })
-                .then(data => {
-                    checkin = data.checkin;
-                    checkout = data.checkout;
+                .then(
+                    data => {
+                    checkin1 = data.checkin;
+                    checkout1 = data.checkout;
                     tipoHabitacion = data.tipoHabitacion;
                     cantidadAdultos = data.cantidadAdultos;
                     cantidadMenores = data.cantidadMenores;
@@ -156,8 +168,8 @@
                     asignada = data.asignada;
                     mostrarDatosCotizacion = true; //Activa la vista del segundo formulario
                     mostrarFormulario();
-
-                })
+                    }
+                )
                 .catch(error => {
                     alert('Código no encontrado.');
                 });
@@ -166,8 +178,8 @@
         // Muestra el formulario con los datos del cotizacion
         function mostrarFormulario() {
             if (mostrarDatosCotizacion) {
-                document.getElementById('checkin').value = checkin;
-                document.getElementById('checkout').value = checkout;
+                document.getElementById('checkin').value = fechaTipoDate(checkin1);
+                document.getElementById('checkout').value = fechaTipoDate(checkout1);
                 document.getElementById('tipoHabitacion').value = tipoHabitacion;
                 document.getElementById('cantidadAdultos').value = cantidadAdultos;
                 document.getElementById('cantidadMenores').value = cantidadMenores;
@@ -300,6 +312,19 @@
 
         //     document.getElementById('datos-cotizacion').style.display = 'none';
         // }
+
+        function fechaTipoDate(p_fecha){
+            var diferencia = 1000 * 60 * 60 * 3 * 1;
+            var fecha1 = new Date(p_fecha);
+            var fecha = new Date(fecha1.getTime() + (diferencia));
+            var year = fecha.getFullYear();
+            var month = ('0' + (fecha.getMonth() + 1)).slice(-2); // Los meses empiezan desde 0
+            var day = ('0' + fecha.getDate()).slice(-2);
+            var fechaFormateada = year + '-' + month + '-' + day;
+            return fechaFormateada;
+        }
+
+
     </script>
 </body>
 </html>

@@ -1,0 +1,478 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+ /*   font-optical-sizing: auto;  */
+    scroll-behavior: smooth;
+}
+
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 2000px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    height: 350px;
+    width: 100vw;
+    background: linear-gradient(rgba(5, 7, 12, 0.5),rgba(5, 7, 12, 0.5)),
+    url('/img/header6.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 60px 200px;
+}
+
+.logo{
+    width: 250px;
+    height: 125px;
+}
+
+
+.lista{
+    list-style: none;
+    display: flex;
+    border-bottom: 0.5px solid white;
+}
+
+.li{
+    font-size: 1rem;
+    padding: 10px 30px 0 0 ;
+    margin: 80px 0 0 20px ;
+}
+
+.li:hover{
+    cursor: pointer;
+}
+
+.item{
+    text-decoration: none;
+    color: white;
+}
+
+.check-btn{
+    display: none;
+}
+
+#check-btn{
+    display: none;
+}
+
+.item {
+    grid-area: miArea;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#descripcion{
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding: 70px;
+    gap: 25px;
+    max-width: 950px;
+}
+
+
+.habitacines-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    background-color:white;
+    align-items: center;
+}
+
+#habitacion1{
+  /*  size-adjust: auto;*/
+    padding: 30px;
+    max-width: 100%;
+    display: flex;
+    transition: all 0.8s ease;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#habitacion2{
+  /*  size-adjust: auto; */
+    padding: 30px;
+    max-width: 100%;
+    display: flex;
+    transition: all 0.8s ease;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#habitacion3{
+  /*  size-adjust: auto; */
+    padding: 30px;
+    max-width: 100%;
+    display: flex;
+    transition: all 0.8s ease;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.foto a{
+    position: relative;
+    cursor: pointer;
+    align-items: center;
+    overflow: hidden;
+    width: 70%;
+    height: 100%;
+}
+.foto a img{
+    width: 100%;
+    height: 100%;
+    transition: all 0.8s ease;
+    
+}
+
+.foto a .capa{
+    font-size: large;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0  , 0.7);
+    transition: all 0.6s ease;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+}
+
+.foto a .capa h3{
+    color: white;
+    padding-top: 110px;
+}
+.foto a .capa P{
+    color: white;
+    max-width: 80%;
+    margin: auto;
+    line-height: 1.5;
+    padding: 30px;
+}
+
+
+.foto a:hover > .capa{
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.6s ease;
+    text-align: center;
+    color: white;
+}
+
+
+.foto a:hover > img {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.6s ease;
+    text-align: center;
+    color: white;
+    transform: scale(1.2);
+}
+
+
+.foto:hover p#sobre{
+    font-size: 40px;
+}
+
+.detalles{
+    font-size: 0.9rem;
+    width: 30%;
+    height: auto;
+    background: #776f6f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 5px;
+    flex-wrap: nowrap;
+    margin-left: -50px;
+    z-index: 2;
+}
+.detalles ul{
+    list-style: none;
+}
+
+.bg-img{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.bg{
+    width: 100vw;
+}
+
+.bg-img h1{
+    margin-top: -30vw;
+    color: white;
+    font-size: 2.5rem;
+}
+
+.bg-img .bg-flotante{
+    width: 80%;
+    margin-top: 15vw;
+}
+
+
+#info-extra{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 60px;
+    max-width: 1000px;
+    font-size: 1.1rem;
+    color: #0394bb;
+}
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    background: #000;
+    background:url('/img/footer2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.logo-footer{
+    width: 200px;
+    height: auto;
+}
+
+.social *{
+    width: 40px;
+    margin: 20px;
+}
+
+
+@media (max-width: 1400px) {
+
+    header{
+        padding: 70px 100px;
+    }
+    
+    .logo{
+        width: 200px;
+        height: 100px;
+        margin-top: 20px;
+    }
+
+}
+
+@media (max-width: 1250px) {
+
+}
+
+@media (max-width: 1000px) {
+    header{
+        padding: 70px;
+        height: 225px;
+    }
+
+    .logo{
+        width: 180px;
+        height: 90px;
+        margin-top: 30px;
+    }
+
+    .li{
+        font-size: 0.8rem;
+        padding: 10px 20px 0 0 ;
+        margin: 80px 0 0 20px ;
+    }
+
+
+}
+
+@media (max-width: 800px) {
+    header{
+        padding: 70px 30px;
+    }
+
+    #descripcion {
+        width: 100vw;
+    }
+
+    .habitacines-container div{
+        flex-direction: column;
+    }
+
+    .habitacines-container div a{
+        width: 80vw;
+    }
+
+    .habitacines-container div div{
+        width: 70vw;
+        margin: -15px 0 0 0;
+        
+    }
+
+    .li{
+        font-size: 0.8rem;
+        padding: 10px 10px 0 10px ;
+        margin: 80px 0 0 0px ;
+    }
+
+    .foto a .capa P{
+        display: none;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    header{
+        justify-content: space-between;
+        padding: 20px 20px 0 20px;
+        flex-wrap: wrap;
+        align-self: flex-start;
+        height: 150px;
+    }
+
+    .logo{
+        width: 100px;
+        height: 60px;
+        margin: 15px 15px 0px 15px;
+    }
+
+    .menu{
+        display: flex;
+        background: #0b0b0b;
+        height: 550px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+        opacity: 0;
+        padding: 50px;
+        width: 100vw;
+        transition: all .7s;
+    }
+    
+    #check-btn:checked + .menu{
+        /* margin-left: 0px; */
+        opacity: 1;
+    }
+    
+    .lista{
+        flex-wrap: wrap;
+        border: none;
+        gap: 30px;
+    }
+
+    .li{
+        font-size: 1rem;
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 15px;
+    }
+
+    .check-btn{
+        display: inline;
+        color: white;
+        padding: 35px;
+    }
+    
+    #descripcion{
+        padding: 60px 35px;
+    }
+
+    #descripcion p{
+        font-size: 0.8rem;
+    }
+
+    #habitacion{
+        flex-direction: column;
+    }
+
+    .foto a{
+        width: 100%;
+    }
+
+    .detalles{
+        margin: -5vw 0 0 0;
+        width: 70%;
+    }
+
+    .bg-img h1{
+        font-size: 2rem;
+    }
+
+    .h2{
+        font-size: 1rem;
+    }
+
+
+    .social *{
+        width: 30px;
+        margin: 10px;
+    }
+
+
+}
+
+@media (max-width: 400px) {
+
+    #descripcion{
+        padding: 40px 20px;
+    }
+
+    #descripcion h2{
+        font-size: 1.2rem;
+    }
+
+    #descripcion h3{
+        font-size: 1rem;
+    }
+
+    #descripcion p{
+        font-size: 0.7rem;
+    }
+
+    .habitacines-container div div h4{
+        font-size: 0.8rem;
+    }
+
+    .habitacines-container div div li{
+        font-size: .7rem;
+    }
+
+    .bg-img h1{
+        font-size: 1rem;
+    }
+
+    #info-extra{
+        font-size: 0.7rem;
+    }
+
+    .social *{
+        width: 30px;
+        margin: 5px;
+    }
+}
