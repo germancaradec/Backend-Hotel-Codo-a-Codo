@@ -1,0 +1,456 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+   /* font-optical-sizing: auto; */  
+    scroll-behavior: smooth;
+}
+
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    flex-wrap: nowrap;
+    overflow: hidden;
+
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    height: 650px;
+    width: 100vw;
+    background: linear-gradient(rgba(5, 7, 12, 0.5),rgba(5, 7, 12, 0.5)),
+    url('/img/header4.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 60px 200px;
+}
+
+.logo{
+    width: 250px;
+    height: 125px;
+}
+
+
+.lista{
+    list-style: none;
+    display: flex;
+    border-bottom: 0.5px solid white;
+}
+
+.li{
+    font-size: 1rem;
+    padding: 10px 30px 0 0 ;
+    margin: 80px 0 0 20px ;
+}
+
+.li:hover{
+    cursor: pointer;
+}
+
+.item{
+    text-decoration: none;
+    color: white;
+}
+
+.check-btn{
+    display: none;
+}
+
+#check-btn{
+    display: none;
+}
+
+.encabezado-main {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.encabezado-main h1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+    width: 50vw;
+    font-size: 1.7rem;
+}
+
+.gastro p{
+    font-size: 1rem;
+}
+
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: -380px 0 0 0;
+    padding: 20px;
+    width: 100vw;
+}
+
+.h1-main {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    color: white;
+    width: 95vw;
+    flex-wrap: wrap;
+    max-width: 1450px;
+    gap: 30px;
+    align-items: center;
+}
+
+
+h1{
+    font-size: 1.3rem;
+    margin: 0 100px 0 100px;
+    text-align: center;
+}
+
+.p-main{
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+    margin: 70px;
+    padding: 0 60px;
+}
+
+h3{
+    font-size: 1.5rem;
+    padding: 0 150px 30px 150px;
+    
+}
+
+p{
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.contenedor-gastro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    flex-wrap: wrap;
+    width: 100vw;
+    gap: 20px;
+}
+
+.image-gastro{
+    width: 450px;
+    filter: grayscale(100%);
+    transition: all ease 0.5s;
+}
+
+.image-gastro:hover{
+    scale: 145%;
+    filter: grayscale(0%);
+    position: relative;
+    z-index: 2;
+}
+
+
+.gastro-2{
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    font-size: 1rem;
+    color: black;
+    width: 100%;
+    max-width: 1300px;
+    padding: 50px;
+    align-content: center;
+}
+
+
+.bg-img{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.bg{
+    width: 100vw;
+}
+
+.bg-img h1{
+    margin-top: -30vw;
+    color: white;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.bg-img .bg-flotante{
+    width: 80%;
+    margin-top: 15vw;
+}
+
+
+
+aside{
+    color: black;
+    width: 100%;
+    max-width: 1300px;
+    padding: 100px 140px 0 140px;
+    color: #0394bb;
+    
+}
+
+
+
+
+
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    background: #000;
+    background:url('/img/footer2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.logo-footer{
+    width: 200px;
+    height: auto;
+}
+
+.social *{
+    width: 40px;
+    margin: 20px;
+}
+
+
+
+
+@media (max-width: 1400px) {
+    
+    header{
+        padding: 70px 100px;
+    }
+    
+    .logo{
+        width: 200px;
+        height: 100px;
+        margin-top: 20px;
+    }
+
+}
+
+@media (max-width: 1000px) {
+    header{
+        padding: 70px;
+    }
+
+    .logo{
+        width: 180px;
+        height: 90px;
+        margin-top: 30px;
+    }
+
+
+    .li{
+        font-size: 0.8rem;
+        padding: 10px 20px 0 0 ;
+        margin: 80px 0 0 20px ;
+    }
+
+    .encabezado-main h1{
+        width: 80vw;
+    }
+
+}
+
+@media (max-width: 800px) {
+    header{
+        padding: 70px 30px;
+    }
+
+    .li{
+        font-size: 0.8rem;
+        padding: 10px 10px 0 10px ;
+        margin: 80px 0 0 0px ;
+    }
+
+    .encabezado-main h1{
+        font-size: 1.3rem;
+    }
+
+    .bg-img h1{
+        font-size: 1.6rem;
+    }
+
+    #info-extra h1{ 
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    #info-extra p{ 
+        font-size: 1rem;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    header{
+        justify-content: space-between;
+        padding: 20px 20px 0 20px;
+        flex-wrap: wrap;
+        align-self: flex-start;
+    }
+
+    .logo{
+        width: 100px;
+        height: 60px;
+        margin: 15px 15px 0px 15px;
+    }
+
+    .menu{
+        display: flex;
+        background: #0b0b0b;
+        height: 550px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+        opacity: 0;
+        padding: 50px;
+        /* margin-left: 650px; */
+        width: 100vw;
+        transition: all .7s;
+    }
+    
+    #check-btn:checked + .menu{
+        /* margin-left: 0px; */
+        opacity: 1;
+    }
+    
+    .lista{
+        flex-wrap: wrap;
+        border: none;
+        gap: 30px;
+    }
+
+    .li{
+        font-size: 1rem;
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 15px;
+    }
+
+    .check-btn{
+        display: inline;
+        color: white;
+        padding: 35px;
+    }
+
+    .main{
+        margin-top: -530px;
+    }
+
+    .encabezado-main h1{
+        font-size: 1.1rem;
+    }
+
+    .gastro p{
+        font-size: 0.8rem;
+    }
+
+    .bg-img h1{
+        font-size: 1rem;
+    }
+
+    .h2{
+        font-size: 1rem;
+    }
+
+    aside{
+        padding: 30px;
+    }
+
+
+    .gastro-2 h3{
+        padding: 40px 40px;
+        font-size: 1.3rem;
+    }
+
+    .gastro-2 p{
+        font-size: .9rem;
+        padding-bottom: 40px;
+    }
+
+
+    #info-extra h1{ 
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    #info-extra p{ 
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    
+    .social *{
+        width: 30px;
+        margin: 10px;
+    }
+
+
+}
+
+@media (max-width: 400px) {
+
+    .gastro-2 h3{
+        font-size: 0.9rem;
+    }
+
+    .gastro-2 p{
+        font-size: .7rem;
+       }
+
+    .bg-img h1{
+        font-size: 0.7rem;
+    }
+
+    #info-extra h1{ 
+        font-size: 0.8rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    #info-extra p{ 
+        font-size: 0.7rem;
+        text-align: center;
+    }
+
+    .p-main {
+        margin: 70px 20px;
+    }
+
+    .social *{
+        width: 30px;
+        margin: 5px;
+    }
+}
+    
+    
