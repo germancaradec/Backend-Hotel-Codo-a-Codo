@@ -51,7 +51,7 @@
 
             </form>
 
-            <section class="administradores">
+            <!-- <section class="administradores">
                 <label for="btn-item" class="btn-item">INGRESAR COMO ADMINISTRADOR</label>
                 <input type="checkbox" id="btn-item">
                 <div class="form-admin">
@@ -60,7 +60,7 @@
                     <label for="contrasena">Contraseña:</label>
                     <input type="text" name="contrasena" id="contrasena">
                     <button id="btn-ingre" onclick="ingresarAdministrador()">INGRESAR</button>
-                    <!-- <button id="btn-ingre" onclick="salirAdministrador()">Logout</button> -->
+
                 </div>
                 
                 <div id="func-admin" class="funcAdminInactivo">
@@ -74,7 +74,7 @@
                         <button class="admin">ELIMINAR CONSULTAS</button>
                     </a>
                 </div>
-            </section>
+            </section> -->
 
             <section class="lugar-1">
                 <h1>La magnífica Riviera</h1>
@@ -253,51 +253,51 @@ limpiarFormulario()
     }
 
 
-        // Ingresar como administrador
-        function ingresarAdministrador() {
-        //definimos variables de datos necesarias
-        const contraCorrecta = "admin2024"
-        const usuario = document.getElementById("usuario").value
-        const contraIngresada = document.getElementById("contrasena").value
-        // const contraSs = localStorage.getItem("ContraseñaIngresada")
-        const seccionAdmin = document.getElementById("func-admin")
+    //     // Ingresar como administrador
+    //     function ingresarAdministrador() {
+    //     //definimos variables de datos necesarias
+    //     const contraCorrecta = "admin2024"
+    //     const usuario = document.getElementById("usuario").value
+    //     const contraIngresada = document.getElementById("contrasena").value
+    //     // const contraSs = localStorage.getItem("ContraseñaIngresada")
+    //     const seccionAdmin = document.getElementById("func-admin")
         
-        // //definimos y asignasmos valores a Usurario y Contrasseña en sS
-        localStorage.setItem("Usuario", usuario)
-        localStorage.setItem("ContraseñaIngresada", contraIngresada) 
+    //     // //definimos y asignasmos valores a Usurario y Contrasseña en sS
+    //     localStorage.setItem("Usuario", usuario)
+    //     localStorage.setItem("ContraseñaIngresada", contraIngresada) 
         
-        //llamamos a la funcion que agrega o remueve la clase del div, según si la contraseña coincide o no (pasandole los parametros que necesita)
-        compararSs(contraCorrecta, contraIngresada, seccionAdmin)
-    }
+    //     //llamamos a la funcion que agrega o remueve la clase del div, según si la contraseña coincide o no (pasandole los parametros que necesita)
+    //     compararSs(contraCorrecta, contraIngresada, seccionAdmin)
+    // }
 
-    function compararSs(contraCorrecta, contraIngresada, seccionAdmin) {
-        // si la contraseña de sessionstorage es igual a la contraCorrecta, quitamos la clase con display none, sino la agregamos.
-        esAdmin = localStorage.getItem('EsAdmin') 
-        console.log('comparass  ES '+ localStorage.getItem('EsAdmin')  )
-        console.log('contraCorrecta  ES '+ contraCorrecta  )
-        console.log('contraIngresada  ES '+ contraIngresada  )
-        if ((contraCorrecta === contraIngresada))  {
-            console.log('verdadero comp')
-        }    
-        if (esAdmin)  {
-            console.log('verdadero esadmin')
-        }    
+    // function compararSs(contraCorrecta, contraIngresada, seccionAdmin) {
+    //     // si la contraseña de sessionstorage es igual a la contraCorrecta, quitamos la clase con display none, sino la agregamos.
+    //     esAdmin = localStorage.getItem('EsAdmin') 
+    //     console.log('comparass  ES '+ localStorage.getItem('EsAdmin')  )
+    //     console.log('contraCorrecta  ES '+ contraCorrecta  )
+    //     console.log('contraIngresada  ES '+ contraIngresada  )
+    //     if ((contraCorrecta === contraIngresada))  {
+    //         console.log('verdadero comp')
+    //     }    
+    //     if (esAdmin)  {
+    //         console.log('verdadero esadmin')
+    //     }    
 
-        if ((contraCorrecta === contraIngresada) || esAdmin===true )  {
-            seccionAdmin.classList.remove("funcAdminInactivo")
+    //     if ((contraCorrecta === contraIngresada) || esAdmin===true )  {
+    //         seccionAdmin.classList.remove("funcAdminInactivo")
         
-            esAdmin = localStorage.getItem('EsAdmin') 
-            console.log ('ver v ' + esAdmin);
-            localStorage.setItem('EsAdmin', true);
+    //         esAdmin = localStorage.getItem('EsAdmin') 
+    //         console.log ('ver v ' + esAdmin);
+    //         localStorage.setItem('EsAdmin', true);
 
-        } else {
-            seccionAdmin.classList.add("funcAdminInactivo")
-            localStorage.setItem('EsAdmin', false);
+    //     } else {
+    //         seccionAdmin.classList.add("funcAdminInactivo")
+    //         localStorage.setItem('EsAdmin', false);
             
-            esAdmin = localStorage.getItem('EsAdmin') 
-            console.log ('ver f ' + esAdmin);
-        }
-    }
+    //         esAdmin = localStorage.getItem('EsAdmin') 
+    //         console.log ('ver f ' + esAdmin);
+    //     }
+    // }
 
 
     </script>
