@@ -65,13 +65,19 @@
                     <label for="contrasena">Contraseña:</label>
                     <input type="text" name="contrasena" id="contrasena">
                     <button id="btn-ingre" onclick="ingresarAdministrador()">INGRESAR</button>
-                    <button id="btn-ingre" onclick="salirAdministrador()">Logout</button>
-
+                    <!-- <button id="btn-ingre" onclick="salirAdministrador()">Logout</button> -->
                 </div>
+
                 <div id="func-admin" class="funcAdminInactivo">
-                    <a href="listado.html" target="_blank"> <button class="admin">LISTAR COTIZACIONES</button></a>
-                    <a href="modificaciones.html" target="_blank"> <button class="admin">MODIFICAR COTIZACIÓN</button></a>
-                    <a href="listadoEliminar.html" target="_blank"> <button class="admin">ELIMINAR COTIZACIÓN</button></a>
+                    <a href="listadoCotizaciones.html"> 
+                        <button class="admin">LISTAR COTIZACIONES</button>
+                    </a>
+                    <a href="modificacionesCotizaciones.html"> 
+                        <button class="admin">MODIFICAR COTIZACIÓN</button>
+                    </a>
+                    <a href="listadoEliminarCotizaciones.html"> 
+                        <button class="admin">ELIMINAR COTIZACIÓN</button>
+                    </a>
                 </div>
             </section>
             
@@ -232,6 +238,11 @@
         `El email no es valido`
     } else {
 
+
+
+
+
+        
 // Si pasa las validaciones, hacemos la solicitud.
 
 // const URL = "http://127.0.0.1:5000/"
@@ -318,15 +329,15 @@ const URL = "http://127.0.0.1:5000/"
         console.log('contraCorrecta  ES '+ contraCorrecta  )
         console.log('contraIngresada  ES '+ contraIngresada  )
         if ((contraCorrecta === contraIngresada))  {
-           console.log('verdadero comp')
+            console.log('verdadero comp')
         }    
         if (esAdmin)  {
-           console.log('verdadero esadmin')
+            console.log('verdadero esadmin')
         }    
 
         if ((contraCorrecta === contraIngresada) || esAdmin===true )  {
             seccionAdmin.classList.remove("funcAdminInactivo")
-          
+        
             esAdmin = localStorage.getItem('EsAdmin') 
             console.log ('ver v ' + esAdmin);
             localStorage.setItem('EsAdmin', true);
@@ -339,36 +350,36 @@ const URL = "http://127.0.0.1:5000/"
             console.log ('ver f ' + esAdmin);
         }
     }
-    function salirAdministrador(){
+    // function salirAdministrador(){
         
-        var esAdmin = localStorage.getItem('EsAdmin') 
-        console.log ('ver 1 ' + esAdmin);
-       
-        const seccionAdmin = document.getElementById("func-admin")    
-        seccionAdmin.classList.add("funcAdminInactivo")
-        localStorage.setItem('EsAdmin', false);
+    //     var esAdmin = localStorage.getItem('EsAdmin') 
+    //     console.log ('ver 1 ' + esAdmin);
         
-        esAdmin = localStorage.getItem('EsAdmin') 
-        console.log ('ver 2 ' + esAdmin);
+    //     const seccionAdmin = document.getElementById("func-admin")    
+    //     seccionAdmin.classList.add("funcAdminInactivo")
+    //     localStorage.setItem('EsAdmin', false);
+        
+    //     esAdmin = localStorage.getItem('EsAdmin') 
+    //     console.log ('ver 2 ' + esAdmin);
 
-    }
+    // }
 
 
     // // Asignamos el evento al botón
     // document.getElementById("btn-ingre").addEventListener("click", ingresarAdministrador);
 
-        function  esAdministrador(){
-          const seccionAdmin = document.getElementById("func-admin")  
-          var esAdmin = localStorage.getItem('EsAdmin') 
-          if ( esAdmin===true )  {
-            seccionAdmin.classList.remove("funcAdminInactivo")
-            console.log ('ver x ' + localStorage.getItem('EsAdmin'));
-          } else {
-            seccionAdmin.classList.add("funcAdminInactivo");
-            localStorage.setItem('EsAdmin', false);
-            console.log ('ver y ' + localStorage.getItem('EsAdmin'));
-          }
-        }
+        // function  esAdministrador(){
+        //     const seccionAdmin = document.getElementById("func-admin")  
+        //     var esAdmin = localStorage.getItem('EsAdmin') 
+        //     if ( esAdmin===true )  {
+        //         seccionAdmin.classList.remove("funcAdminInactivo")
+        //         console.log ('ver x ' + localStorage.getItem('EsAdmin'));
+        //     } else {
+        //         seccionAdmin.classList.add("funcAdminInactivo");
+        //         localStorage.setItem('EsAdmin', false);
+        //         console.log ('ver y ' + localStorage.getItem('EsAdmin'));
+        //     }
+        // }
 
 
     document.addEventListener('DOMContentLoaded', esAdministrador);

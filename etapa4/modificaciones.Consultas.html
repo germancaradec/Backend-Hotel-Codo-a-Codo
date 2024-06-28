@@ -5,72 +5,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar cotizacion</title>
+    <title>Modificar consultas</title>
     <link rel="stylesheet" href="./static/css/estilos.css">
     <link rel="shortcut icon" href="static/imagenes/hotel.png" type="image/x-icon">
 </head>
 
 <body>
-    <header>
-        <nav class="navbar-index ">
-            <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
-        </nav>
+    <header class="navbar-index">
+        <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
+        <section class="nav">
+            <h2>ADMINISTRAR CONSULTAS</h2>
+            <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoConsultas.html"> 
+                    <button class="boton-header">LISTAR CONSULTAS</button>
+                </a>
+                <a href="modificaciones.Consultas.html"> 
+                    <button class="boton-header">MODIFICAR CONSULTAS</button>
+                </a>
+                <a href="listadoEliminarConsultas.html"> 
+                    <button class="boton-header">ELIMINAR CONSULTAS</button>
+                </a>
+            </nav>
+        </section>
     </header>
 
     <div class="logo-centrado">
         <h1>ADMINISTRACIÓN</h1>
     </div>
-    <h3>Modificar Cotizaciones del inventario</h3><br>
+    <h3>Modificar Consultas del inventario</h3><br>
 
     <!-- Contenedor principal que será controlado por JavaScript. Este contenedor tendrá dos formularios. -->
     <div id="app">
         <!-- Primer formulario: Selector de cotizacion. LLama a la función obtenerCotizacion cuando se envíe el formulario -->
-        <form id="form-obtener-cotizacion">
+        <form id="form-obtener-consulta">
             <label for="codigo">Código:</label>
             <input type="text" id="codigo" required><br>
-            <button type="submit" class="boton2-form">Modificar cotizacion</button> 
-            <a href="index.html" class="boton3-form">Menu principal</a>
+            <button type="submit" class="boton2-form">Modificar consulta</button> 
+            <a href="contacto.html" class="boton1-form">Cerrar sesión</a>
         </form>
 
         <!-- Segundo formulario: se muestra solo si mostrarDatosCotizacion es verdadero. Llama a la función guardarCambios -->
-        <div id="datos-cotizacion" style="display: none;">
-            <h2>Datos de la cotizacion</h2>
+        <div id="datos-consulta" style="display: none;">
+            <h2>Datos de la consulta</h2>
             <form id="form-guardar-cambios">
-                <label for="checkin" class="check-in">Check-in:</label>
-                <input type="date" name="checkin" id="checkin">
-                
-                <label for="checkout" class="check-out">Check-out:</label>
-                <input type="date" name="checkout" id="checkout">
-                
-                <label for="tipoHabitacion" class="tipoHabitacion">Tipo de habitación:</label>
-                    <select id="tipoHabitacion" name="tipoHabitacion">
-                        <option value="" disabled selected hidden>Elija una</option>
-                        <option value="Deluxe">Deluxe</option>
-                        <option value="Family">Family</option>
-                        <option value="Standard">Standard</option>
-                    </select>
+                <label for="nom" class="nom">Nombre: *</label>
+                <input type="text" name="nom" id="nom" maxlength="30"> 
 
+                <label for="ape" class="ape">Apellido: *</label>
+                <input type="text" name="ape" id="ape"> 
 
-                <label for="cantidadAdultos" class="adultos">Adultos:</label>
-                <input type="number" name="cantidadAdultos" id="cantidadAdultos" >
+                <label for="correo" class="correo">E-mail: </label>
+                <input type="email" name="correo" id="correo" placeholder="juan@example.com">
+
+                <label for="tel" class="tel">Teléfono:</label> 
+                <input type="number" id="tel" name="tel">
+
+                <label for="consulta" class="consulta">Consulta: *</label>   
+                <textarea name="consulta" id="consulta" placeholder="Escriba su consulta"></textarea>
                 
-                <label for="cantidadMenores" class="menores">Menores:</label>
-                <input type="number" name="cantidadMenores" id="cantidadMenores" >
+                <label for="check" class="check">Deseo recibir promociones a mi teléfono.</label>
+                <input type="checkbox" id="check" name="check">  
                 
-                <label for="cantidadHabitaciones" class="habitaciones">Habitaciones:</label>
-                <input type="number" name="cantidadHabitaciones" id="cantidadHabitaciones" >
-                
-                <label for="email" class="email">Ingrese su e-mail:</label>
-                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com">
-
-                <label for="asignada" class="tipoHabitacion">Asignada:</label>
-                <select id="asignada" name="asignada">
-                    <option value="" disabled selected hidden>Elija una</option>
-                    <option value="SI">Si</option>
-                    <option value="NO">No</option>
-                </select>
-
-
                 <button type="submit" class="boton2-form">Guardar Cambios</button>
                 <a href="modificaciones.html" class="boton3-form">Cancelar</a>
             </form>
@@ -105,44 +100,40 @@
 
         // Variables de estado para controlar la visibilidad y los datos del formulario
         let codigo = '';
-        let checkin = '';
-        let checkout = '';
-        let tipoHabitacion = '';
-        let cantidadAdultos = '';
-        let cantidadMenores = '';
-        let cantidadHabitaciones = '';
-        let email = '';
-        let asignada = '';
-        let mostrarDatosCotizacion = false;
+        let nom = '';
+        let ape = '';
+        let correo = '';
+        let consulta = '';
+        let tel = '';
+        let check = '';
+        let mostrarDatosConsulta = false;
 
 
-        document.getElementById('form-obtener-cotizacion').addEventListener('submit', obtenerCotizacion);
+        document.getElementById('form-obtener-consulta').addEventListener('submit', obtenerConsulta);
         document.getElementById('form-guardar-cambios').addEventListener('submit', guardarCambios);
         // document.getElementById('nuevaImagen').addEventListener('change', seleccionarImagen);
 
         // Se ejecuta cuando se envía el formulario de consulta. Realiza una solicitud GET a la API y obtiene los datos del cotizacion correspondiente al código ingresado.
-        function obtenerCotizacion(event) {
+        function obtenerConsulta(event) {
             event.preventDefault();
             codigo = document.getElementById('codigo').value;
             alert(`codigo: ${codigo}`);
-            fetch(URL + 'cotizaciones/' + codigo)
+            fetch(URL + 'consultas/' + codigo)
                 .then(response => {
                     if (response.ok) {
                         return response.json()
                     } else {
-                        throw new Error('Error al obtener los datos del cotizacion.')
+                        throw new Error('Error al obtener los datos de la consulta.')
                     }
                 })
                 .then(data => {
-                    checkin = data.checkin;
-                    checkout = data.checkout;
-                    tipoHabitacion = data.tipoHabitacion;
-                    cantidadAdultos = data.cantidadAdultos;
-                    cantidadMenores = data.cantidadMenores;
-                    cantidadHabitaciones = data.cantidadHabitaciones;
-                    email = data.email;
-                    asignada = data.asignada;
-                    mostrarDatosCotizacion = true; //Activa la vista del segundo formulario
+                    nom = data.nom;
+                    ape = data.ape;
+                    correo = data.correo;
+                    consulta = data.consulta;
+                    tel = data.tel;
+                    check = data.check;
+                    mostrarDatosConsulta = true; //Activa la vista del segundo formulario
                     mostrarFormulario();
 
                 })
@@ -153,15 +144,16 @@
 
         // Muestra el formulario con los datos del cotizacion
         function mostrarFormulario() {
-            if (mostrarDatosCotizacion) {
-                document.getElementById('checkin').value = checkin;
-                document.getElementById('checkout').value = checkout;
-                document.getElementById('tipoHabitacion').value = tipoHabitacion;
-                document.getElementById('cantidadAdultos').value = cantidadAdultos;
-                document.getElementById('cantidadMenores').value = cantidadMenores;
-                document.getElementById('cantidadHabitaciones').value = cantidadHabitaciones;
-                document.getElementById('email').value = email;
-                document.getElementById('asignada').value = asignada;
+            if (mostrarDatosConsulta) {
+                document.getElementById('nom').value = nom;
+                document.getElementById('ape').value = ape;
+                document.getElementById('correo').value = correo;
+                document.getElementById('consulta').value = consulta;
+                document.getElementById('tel').value = tel;
+                // Asignar true o false a la propiedad 'checked' del checkbox
+                const checkElement = document.getElementById('check');
+                checkElement.checked = check === 1;
+
                 
 
             //     const imagenActual = document.getElementById('imagen-actual');
@@ -176,9 +168,9 @@
             //         imagenActual.style.display = 'none'; // Oculta la imagen si no hay URL
             //     }
 
-                document.getElementById('datos-cotizacion').style.display = 'block';
+                document.getElementById('datos-consulta').style.display = 'block';
             } else {
-                document.getElementById('datos-cotizacion').style.display = 'none';
+                document.getElementById('datos-consulta').style.display = 'none';
             }
         }
 
@@ -199,14 +191,14 @@
 
             const formData = new FormData();
             formData.append('codigo', codigo);
-            formData.append('checkin', document.getElementById('checkin').value);
-            formData.append('checkout', document.getElementById('checkout').value);
-            formData.append('tipoHabitacion', document.getElementById('tipoHabitacion').value);
-            formData.append('cantidadAdultos', document.getElementById('cantidadAdultos').value);
-            formData.append('cantidadMenores', document.getElementById('cantidadMenores').value);
-            formData.append('cantidadHabitaciones', document.getElementById('cantidadHabitaciones').value);
-            formData.append('email', document.getElementById('email').value);
-            formData.append('asignada', document.getElementById('asignada').value);
+            formData.append('nom', document.getElementById('nom').value);
+            formData.append('ape', document.getElementById('ape').value);
+            formData.append('correo', document.getElementById('correo').value);
+            formData.append('consulta', document.getElementById('consulta').value);
+            formData.append('tel', document.getElementById('tel').value);
+            const checkElement = document.getElementById('check');
+            formData.append('check', checkElement.checked ? 'on' : 'off');
+
             
 
             // // Si se ha seleccionado una imagen nueva, la añade al formData. 
@@ -214,7 +206,7 @@
             //     formData.append('imagen', imagenSeleccionada, imagenSeleccionada.name);
             // }
 
-            fetch(URL + 'cotizaciones/' + codigo, {
+            fetch(URL + 'consultas/' + codigo, {
                 method: 'PUT',
                 body: formData,
             })
@@ -222,19 +214,42 @@
                     if (response.ok) {
                         return response.json()
                     } else {
-                        throw new Error('Error al guardar los cambios de la cotizacion.')
+                        throw new Error('Error al guardar los cambios de la consulta.')
                     }
                 })
                 .then(data => {
-                    alert('Cotizacion actualizada correctamente.');
+                    alert('Consulta actualizada correctamente.');
                     // limpiarFormulario();
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error al actualizar la cotizacion.');
+                    alert('Error al actualizar la consulta.');
                 });
+
+                limpiarFormulario()
         }
 
+
+        function limpiarFormulario() {
+            document.getElementById('codigo').value = '';
+            document.getElementById('nom').value = '';
+            document.getElementById('ape').value = '';
+            document.getElementById('correo').value = '';
+            document.getElementById('consulta').value = '';
+            document.getElementById('tel').value = '';
+            document.getElementById('check').value = '';
+
+            codigo = '';
+            nom = '';
+            ape = '';
+            correo = '';
+            consulta = '';
+            tel = '';
+            check = '';
+            mostrarDatosConsulta = false;
+
+        document.getElementById('datos-consulta').style.display = 'none';
+        }
         //// Restablece todas las variables relacionadas con el formulario a sus valores iniciales, lo que efectivamente "limpia" el formulario.
         // function limpiarFormulario() {
         //     document.getElementById('codigo').value = '';

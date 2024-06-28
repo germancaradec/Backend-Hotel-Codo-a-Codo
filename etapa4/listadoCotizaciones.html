@@ -11,10 +11,22 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar-index ">
-            <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
-        </nav>
+    <header class="navbar-index">
+        <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
+        <section class="nav">
+            <h2>ADMINISTRAR COTIZACIONES</h2>
+            <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoCotizaciones.html"> 
+                    <button class="boton-header">LISTAR COTIZACIONES</button>
+                </a>
+                <a href="modificacionesCotizaciones.html"> 
+                    <button class="boton-header">MODIFICAR COTIZACIÓN</button>
+                </a>
+                <a href="listadoEliminarCotizaciones.html"> 
+                    <button class="boton-header">ELIMINAR COTIZACIÓN</button>
+                </a>
+            </nav>
+        </section>
     </header>
 
     <div class="logo-centrado">
@@ -40,7 +52,7 @@
     </table><br>
 
     <div class="contenedor-centrado">
-        <a href="index.html" class="boton1-form">Menu principal</a>
+        <a href="index.html" class="boton1-form">Cerrar sesión</a>
     </div>
 
     <footer class="footer" id="footer">

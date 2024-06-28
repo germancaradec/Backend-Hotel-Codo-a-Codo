@@ -50,7 +50,6 @@ class CotizacionesGR:
         self.cursor.close()
         self.cursor = self.conn.cursor(dictionary=True)
 
-        # Agregar una cotización (create)
     def agregar_cotizacion(self, checkin, checkout, tipoHabitacion, cantidadAdultos, cantidadMenores, cantidadHabitaciones, email):
         
         sql = "INSERT INTO cotizaciones (checkin, checkout, tipoHabitacion, cantidadAdultos, cantidadMenores, cantidadHabitaciones, email) VALUES (%s, %s, %s, %s, %s, %s, %s)"
@@ -99,11 +98,97 @@ class CotizacionesGR:
         self.conn.commit()
         return self.cursor.rowcount > 0
     
+class ConsultasGR:
+    # Constuctor de la clase
+    def __init__(self, host, user, password, database):
+
+        self.conn = mysql.connector.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=database
+        )
+        self.cursor = self.conn.cursor()
+        # Intentamos seleccionar la base de datos
+        try:
+            self.cursor.execute(f"USE {database}")
+        except mysql.connector.Error as err:
+            #Si la base de datos no existe, la creamos
+            if err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
+                self.cursor.execute(f"CREATE DATABASE {database}")
+                self.conn.database = database
+            else:
+                raise err
+            
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS consultas (
+                        codigo INT AUTO_INCREMENT PRIMARY KEY, nom VARCHAR(30) NOT NULL, ape VARCHAR(20) NOT NULL, correo VARCHAR(20), tel INT, consulta VARCHAR(500) NOT NULL, `check` BOOLEAN DEFAULT FALSE);''')
+        self.conn.commit()
+
+        # Cerrar el cursor inicial y abrir uno nuevo con diccionario = true
+        self.cursor.close()
+        self.cursor = self.conn.cursor(dictionary=True)
+
+        # Agregar una cotización (create)
+    
+        # Agregar una consulta (create)
+    def agregar_consulta(self, nom, ape, correo, tel, consulta, check):
+        
+        sql = "INSERT INTO consultas (nom, ape, correo, tel, consulta, `check`) VALUES (%s, %s, %s, %s, %s, %s)"
+        valores = (nom, ape, correo, tel, consulta, check)
+        self.cursor.execute(sql, valores)
+        self.conn.commit()
+        return self.cursor.lastrowid
+    
+    def modificar_consulta(self, codigo, nuevo_nom, nuevo_ape, nuevo_correo, nuevo_tel, nuevo_consulta, nuevo_check):
+        sql = "UPDATE consultas SET nom = %s, ape = %s, correo = %s, tel = %s, consulta = %s, `check` = %s WHERE codigo = %s"
+        valores = (nuevo_nom, nuevo_ape, nuevo_correo, nuevo_tel, nuevo_consulta, nuevo_check, codigo)
+        self.cursor.execute(sql, valores)
+        self.conn.commit()
+        return self.cursor.rowcount > 0
+
+    def consultar_consulta(self, codigo):
+        # Consultamos una cotización a partir de su codigo
+        self.cursor.execute(f"SELECT * FROM consultas WHERE codigo = {codigo} ")
+        return self.cursor.fetchone()
+    
+    def mostrar_consultas(self, codigo):
+        # Mostramos los datos de una cotización a partir de su código
+        consulta = self.consultar_consulta(codigo)
+        if consulta:
+            print("-"*50)
+            print(f'Nombre.....................: {consulta["nom"]}')
+            print(f'Apellido...................: {consulta["ape"]}')
+            print(f'Correo..................: {consulta["correo"]}')
+            print(f'Telefono.........: {consulta["tel"]}')
+            print(f'Consulta........: {consulta["consulta"]}')
+            print(f'check........: {consulta["check"]}')
+
+            print("-"*50)
+        else:
+            print("Consulta no encontrada.")
+        
+    def listar_consultas(self):
+        self.cursor.execute("SELECT * FROM consultas order by codigo")
+        consultas = self.cursor.fetchall()
+        return consultas
+
+    def eliminar_consulta(self, codigo):
+        # Eliminamos una cotización de la tabla a partir de su código
+        self.cursor.execute(f"DELETE FROM consultas WHERE codigo = {codigo}")
+        self.conn.commit()
+        return self.cursor.rowcount > 0
+    
+
+
+
 
 #---------------------------------------------------------------------------
 # Programa principal
 #---------------------------------------------------------------------------
-# Crear una instancia de la clase catalogo
+
+
+
+# Crear una instancia de la clase cotizaciones
 cotizacionesGR = CotizacionesGR(host='localhost', user='root', password='', database='hotelapp')
 
 @app.route("/cotizaciones", methods=["GET"])
@@ -119,7 +204,7 @@ def mostrar_cotizacion(codigo):
         return jsonify(cotizacion)
     else:
         return "Cotización no encontrada", 404
-    
+
 @app.route("/cotizaciones", methods=["POST"])
 def agregar_cotizacion():
     # linea = 100
@@ -208,6 +293,73 @@ def eliminar_cotizacion(codigo):
             return jsonify({"mensaje": "Error al eliminar la cotizacion"}), 500
     else:
         return jsonify({"mensaje": "Cotizacion no encontrada"}), 404
+
+
+
+
+# Crear una instancia de la clase consultas
+consultasGR = ConsultasGR(host='localhost', user='root', password='', database='hotelapp')
+
+@app.route("/consultas", methods=["GET"])
+def listar_consultas():
+    consultas = consultasGR.listar_consultas()
+    return jsonify(consultas)
+
+@app.route("/consultas/<int:codigo>", methods=["GET"])
+def mostrar_consultas(codigo):
+    consulta = consultasGR.consultar_consulta(codigo)
+
+    if consulta:
+        return jsonify(consulta)
+    else:
+        return "Consulta no encontrada", 404
+    
+@app.route("/consultas", methods=["POST"])
+def agregar_consulta():
+    #Recojo los datos del form
+    nom = request.form['nom']
+    ape = request.form['ape']
+    correo = request.form['correo']
+    tel = request.form['tel']
+    consulta = request.form['consulta']  
+
+    check = 'check' in request.form and request.form['check'] == 'on' 
+    
+    nueva_consulta = consultasGR.agregar_consulta(nom, ape, correo, tel, consulta, check)
+    if nueva_consulta:    
+        return jsonify({"mensaje": "Consulta agregada correctamente.", "consulta": nueva_consulta, "nom": nom, "ape": ape}), 201
+    else:
+        return jsonify({"mensaje": "Error al agregar la consulta."}), 500, {"Access-Control-Allow-Origin": "localhost"}
+
+@app.route("/consultas/<int:codigo>", methods=["PUT"])
+def modificar_consulta(codigo):
+    #Se recuperan los nuevos datos del formulario
+    nom = request.form['nom']
+    ape = request.form['ape']
+    correo = request.form['correo']
+    tel = request.form['tel']
+    consulta = request.form['consulta'] 
+    # Manejo del checkbox
+    check = 'check' in request.form and request.form['check'] == 'on'  
+    
+    # Se llama al método modificar_cotizacion pasando el codigo del cotizacion y los nuevos datos.
+    if consultasGR.modificar_consulta(codigo, nom, ape, correo, tel, consulta, check):
+        return jsonify({"mensaje": "Consulta modificada"}), 200
+    else:
+        return jsonify({"mensaje": "Consulta no encontrada"}), 403
+
+@app.route("/consultas/<int:codigo>", methods=["DELETE"])
+def eliminar_consulta(codigo):
+    # Primero, obtiene la información del cotizacion para encontrar la imagen
+    consulta = consultasGR.consultar_consulta(codigo)
+    if consulta:
+        # Luego, elimina el cotizacion del catálogo
+        if consultasGR.eliminar_consulta(codigo):
+            return jsonify({"mensaje": "Consulta eliminada"}), 200
+        else:
+            return jsonify({"mensaje": "Error al eliminar la consulta"}), 500
+    else:
+        return jsonify({"mensaje": "Consulta no encontrada"}), 404
 
 if __name__ == "__main__":
     app.run(debug=True)

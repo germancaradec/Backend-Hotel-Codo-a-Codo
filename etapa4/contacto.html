@@ -16,7 +16,7 @@
         </header>
         
         <main class="main">
-            <section class="formulario">
+            <form class="formulario" id="formulario">
                 <h1 class="h1-form">Escríbenos y déjanos tu consulta o sugerencia</h1>
                 <br>
                 <label for="nom" class="nom">Nombre: *</label>
@@ -26,7 +26,7 @@
                 <input type="text" name="ape" id="ape"> 
 
                 <label for="correo" class="correo">E-mail: </label>
-                <input type="email" name="mail" id="correo" placeholder="juan@example.com">
+                <input type="email" name="correo" id="correo" placeholder="juan@example.com">
 
                 <label for="tel" class="tel">Teléfono:</label> 
                 <input type="number" id="tel" name="tel">
@@ -38,9 +38,9 @@
                 <br>
                 
                 <label for="check" class="check">Deseo recibir promociones a mi teléfono.</label>
-                <input type="checkbox" id="check">  
+                <input type="checkbox" id="check" name="check">  
                 
-                <button class="enviar-btn" onclick="validarFormulario()">Enviar consulta</button>
+                <button class="enviar-btn" type="submit">Enviar consulta</button>
                 
                 <button class="limpiar-btn" onclick="limpiarFormulario()">Limpiar formulario</button>
                 
@@ -49,6 +49,31 @@
                 <p id="solicitud-tel" class="solicitud-tel"></p>
                 
 
+            </form>
+
+            <section class="administradores">
+                <label for="btn-item" class="btn-item">INGRESAR COMO ADMINISTRADOR</label>
+                <input type="checkbox" id="btn-item">
+                <div class="form-admin">
+                    <label for="usuario" class="usuario">Usuario:</label>
+                    <input type="text" name="usuario" id="usuario">
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="text" name="contrasena" id="contrasena">
+                    <button id="btn-ingre" onclick="ingresarAdministrador()">INGRESAR</button>
+                    <!-- <button id="btn-ingre" onclick="salirAdministrador()">Logout</button> -->
+                </div>
+                
+                <div id="func-admin" class="funcAdminInactivo">
+                    <a href="listadoConsultas.html"> 
+                        <button class="admin">LISTAR CONSULTAS</button>
+                    </a>
+                    <a href="modificaciones.Consultas.html"> 
+                        <button class="admin">MODIFICAR CONSULTAS</button>
+                    </a>
+                    <a href="listadoEliminarConsultas.html"> 
+                        <button class="admin">ELIMINAR CONSULTAS</button>
+                    </a>
+                </div>
             </section>
 
             <section class="lugar-1">
@@ -119,8 +144,16 @@ let footer =`
 document.getElementById("footer").innerHTML = footer
 
 
+// Capturamos el evento de envío del formulario
+document.getElementById('formulario').addEventListener('submit', function (event) {
+    event.preventDefault(); // Evitamos que se envie el form 
+
+        
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 //validación del formulario de contacto
-function validarFormulario() {
+
      //definimos variables de datos necesarias
 
     let nombre = document.getElementById("nom").value
@@ -144,15 +177,69 @@ function validarFormulario() {
     } else {
         document.getElementById("solicitud").textContent = 
         `Consulta enviada exitosamente. Le responderemos a su email dentro de las próximas 48hs. ¡Muchas gracias por contactarnos!`
-    }
 
-    //validamos la posibilidad de recibir información al telefono (cargando el número y tildando el checkbox, sumado a las condiciones anteriores)
-    if ( nombre !== "" && apellido !== "" && consulta !== "" && validarCorreo(correo) !== false &&telefono !== "" && check.checked === true) {
-        document.getElementById("solicitud-tel").textContent = 
-        `También le enviaremos a su teléfono información de nuestras mejores promociones`
-    }
-    }
 
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        
+// Si pasa las validaciones, hacemos la solicitud.
+
+        const URL = "http://127.0.0.1:5000/"
+
+//Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+//const URL = "https://USUARIO.pythonanywhere.com/"
+
+        var formData = new FormData(this);
+
+        // Realizamos la solicitud POST al servidor
+        fetch(URL + 'consultas', {
+            method: 'POST',
+            body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+        })
+
+        //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
+        .then(function (response) {
+                if (response.ok) { 
+                    //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                    // linea = 1010
+                    return response.json(); 
+                } else {
+                    // Si hubo un error, lanzar explícitamente una excepción
+                    // para ser "catcheada" más adelante
+                    // linea = 1020
+                    alert("Error1")
+                    throw new Error('Error al agregar la consulta.');
+                }
+        })
+
+            //Respuesta OK, muestra una alerta informando que el cotizacion se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo cotizacion.
+            .then(function (data) {
+                document.getElementById("solicitud").innerHTML = 
+                alert('Consulta enviada correctamente.');
+            })
+
+            // En caso de error, mostramos una alerta con un mensaje de error.
+            .catch(function (error) {
+                alert(`Error al enviar la consulta.1`);
+
+            })
+            
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+//validamos la posibilidad de recibir información al telefono (cargando el número y tildando el checkbox, sumado a las condiciones anteriores)
+if ( nombre !== "" && apellido !== "" && consulta !== "" && validarCorreo(correo) !== false &&telefono !== "" && check.checked === true) {
+    document.getElementById("solicitud-tel").textContent = 
+    `También le enviaremos a su teléfono información de nuestras mejores promociones`
+}
+limpiarFormulario()
+}
+    
+
+})
     function limpiarFormulario() {
         //limpiamos los inputs del formulario
     document.getElementById("nom").value = ""
@@ -161,8 +248,55 @@ function validarFormulario() {
     document.getElementById("consulta").value = ""
     document.getElementById("tel").value = ""
     check.checked = false
-    document.getElementById("solicitud").textContent = ""
-    document.getElementById("solicitud-tel").textContent = ""
+    // document.getElementById("solicitud").textContent = ""
+    // document.getElementById("solicitud-tel").textContent = ""
+    }
+
+
+        // Ingresar como administrador
+        function ingresarAdministrador() {
+        //definimos variables de datos necesarias
+        const contraCorrecta = "admin2024"
+        const usuario = document.getElementById("usuario").value
+        const contraIngresada = document.getElementById("contrasena").value
+        // const contraSs = localStorage.getItem("ContraseñaIngresada")
+        const seccionAdmin = document.getElementById("func-admin")
+        
+        // //definimos y asignasmos valores a Usurario y Contrasseña en sS
+        localStorage.setItem("Usuario", usuario)
+        localStorage.setItem("ContraseñaIngresada", contraIngresada) 
+        
+        //llamamos a la funcion que agrega o remueve la clase del div, según si la contraseña coincide o no (pasandole los parametros que necesita)
+        compararSs(contraCorrecta, contraIngresada, seccionAdmin)
+    }
+
+    function compararSs(contraCorrecta, contraIngresada, seccionAdmin) {
+        // si la contraseña de sessionstorage es igual a la contraCorrecta, quitamos la clase con display none, sino la agregamos.
+        esAdmin = localStorage.getItem('EsAdmin') 
+        console.log('comparass  ES '+ localStorage.getItem('EsAdmin')  )
+        console.log('contraCorrecta  ES '+ contraCorrecta  )
+        console.log('contraIngresada  ES '+ contraIngresada  )
+        if ((contraCorrecta === contraIngresada))  {
+            console.log('verdadero comp')
+        }    
+        if (esAdmin)  {
+            console.log('verdadero esadmin')
+        }    
+
+        if ((contraCorrecta === contraIngresada) || esAdmin===true )  {
+            seccionAdmin.classList.remove("funcAdminInactivo")
+        
+            esAdmin = localStorage.getItem('EsAdmin') 
+            console.log ('ver v ' + esAdmin);
+            localStorage.setItem('EsAdmin', true);
+
+        } else {
+            seccionAdmin.classList.add("funcAdminInactivo")
+            localStorage.setItem('EsAdmin', false);
+            
+            esAdmin = localStorage.getItem('EsAdmin') 
+            console.log ('ver f ' + esAdmin);
+        }
     }
 
 
