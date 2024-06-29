@@ -189,7 +189,7 @@ class ConsultasGR:
 
 
 # Crear una instancia de la clase cotizaciones
-cotizacionesGR = CotizacionesGR(host='localhost', user='root', password='', database='hotelapp')
+cotizacionesGR = CotizacionesGR(host='achuar.mysql.pythonanywhere-services.com', user='achuar', password='hotelapp', database='achuar$hotelapp')
 
 @app.route("/cotizaciones", methods=["GET"])
 def listar_cotizaciones():
@@ -298,7 +298,9 @@ def eliminar_cotizacion(codigo):
 
 
 # Crear una instancia de la clase consultas
-consultasGR = ConsultasGR(host='localhost', user='root', password='', database='hotelapp')
+# consultasGR = ConsultasGR(host='localhost', user='root', password='', database='hotelapp')
+consultasGR = ConsultasGR(host='achuar.mysql.pythonanywhere-services.com', user='achuar', password='hotelapp', database='achuar$hotelapp')
+
 
 @app.route("/consultas", methods=["GET"])
 def listar_consultas():
