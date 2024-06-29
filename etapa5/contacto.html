@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="static/css/contacto.css">
+    <link rel="shortcut icon" href="img/hotel.png" type="image/x-icon"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="contenedor">
+        <header id="header">
+        </header>
+        
+        <main class="main">
+            <form class="formulario" id="formulario">
+                <h1 class="h1-form">Escríbenos y déjanos tu consulta o sugerencia</h1>
+                <br>
+                <label for="nom" class="nom">Nombre: *</label>
+                <input type="text" name="nom" id="nom" maxlength="30"> 
+
+                <label for="ape" class="ape">Apellido: *</label>
+                <input type="text" name="ape" id="ape"> 
+
+                <label for="correo" class="correo">E-mail: </label>
+                <input type="email" name="correo" id="correo" placeholder="juan@example.com">
+
+                <label for="tel" class="tel">Teléfono:</label> 
+                <input type="number" id="tel" name="tel">
+
+                <label for="consulta" class="consulta">Consulta: *</label>   
+                <textarea name="consulta" id="consulta" placeholder="Escriba su consulta"></textarea>
+
+                <p id="campos">* Campos obligatorios</p>
+                <br>
+                
+                <label for="check" class="check">Deseo recibir promociones a mi teléfono.</label>
+                <input type="checkbox" id="check" name="check">  
+                
+                <button class="enviar-btn" type="submit">Enviar consulta</button>
+                
+                <button class="limpiar-btn" onclick="limpiarFormulario()">Limpiar formulario</button>
+                
+
+                <p id="solicitud" class="solicitud"></p>
+                <p id="solicitud-tel" class="solicitud-tel"></p>
+                
+
+            </form>
+
+            <!-- <section class="administradores">
+                <label for="btn-item" class="btn-item">INGRESAR COMO ADMINISTRADOR</label>
+                <input type="checkbox" id="btn-item">
+                <div class="form-admin">
+                    <label for="usuario" class="usuario">Usuario:</label>
+                    <input type="text" name="usuario" id="usuario">
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="text" name="contrasena" id="contrasena">
+                    <button id="btn-ingre" onclick="ingresarAdministrador()">INGRESAR</button>
+
+                </div>
+                
+                <div id="func-admin" class="funcAdminInactivo">
+                    <a href="listadoConsultas.html"> 
+                        <button class="admin">LISTAR CONSULTAS</button>
+                    </a>
+                    <a href="modificaciones.Consultas.html"> 
+                        <button class="admin">MODIFICAR CONSULTAS</button>
+                    </a>
+                    <a href="listadoEliminarConsultas.html"> 
+                        <button class="admin">ELIMINAR CONSULTAS</button>
+                    </a>
+                </div>
+            </section> -->
+
+            <section class="lugar-1">
+                <h1>La magnífica Riviera</h1>
+                <h2>Infinidad de actividades y atracciones para todos</h2>
+                <p>¿Listo para explorar? Este destino de ensueño es conocido por sus exclusivos parques temáticos, las ruinas mayas bien conservadas y emocionantes aventuras al aire libre, a los que se puede acceder fácilmente desde el resort. Ya sea que quieras bucear con tortugas marinas y peces tropicales, o ver una presentación épica que muestra la rica historia y cultura del país, deja que nuestro equipo experto organice excursiones que nunca olvidarás. </p>
+            </section>
+            
+            <section class="iframe">
+                <iframe class="iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d836.5288445703059!2d73.5173914857287!3d4.176277503699527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b3f7fdb37d8f58b%3A0x7a40fb9580738b51!2sArcanum%20Maldives!5e0!3m2!1ses!2sar!4v1715548334546!5m2!1ses!2sar" height="600" style="border:0;  width:100%;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+
+            <section>
+                <div class="bg-img">
+                    <img src="static/imagenes/20.jpg" alt="Imagen de costa" class="bg">
+                    <h1>Acceso directo a la playa!</h1>
+                    <img src="static/imagenes/home-bg-20.png" alt="Imagenes de costa" class="bg-flotante">
+                </div>
+            </section>
+
+            <section id="info-extra">
+                <p>Para disfrutar de la mejor escapada, reserva una suite espaciosa con balcón privado y vistas impresionantes. </p>
+                <p>Algunas suites incluso ofrecen acceso directo a la playa, una exclusiva cabaña de playa designada y un descuento en tratamientos de spa.</p>
+            </section>
+
+        </main>
+
+        <footer id="footer" class="footer">
+        </footer>
+
+    </div>
+        
+    <script>
+
+        // armamos bloque header 
+let header = `
+            <a href="index.html"><img src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri" ></a>
+            
+<label for="check-btn" class="check-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="icon-menu" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+    </svg>
+</label>
+<input type="checkbox" id="check-btn">
+
+<nav class="menu">
+    <ul class="lista">
+        <li class="li"><a class="item" href="index.html">HOME</a></li>
+        <li class="li"><a class="item" href="habitaciones.html">HABITACIONES</a></li>
+        <li class="li"><a class="item" href="gastronomia.html">GASTRONOMIA</a></li>
+        <li class="li"><a class="item" href="contacto.html">CONTACTO</a></li>
+    </ul>
+</nav>
+`; 
+document.getElementById("header").innerHTML = header
+
+
+//armamos bloque footer
+let footer =`
+            <a href="#header"><img src="static/imagenes/logo-negro-furaveri.png" alt="Logo Hotel" class="logo-footer"></a>
+            <section class="social">
+                <a href="https://www.facebook.com/" target="_blank"><img src="static/imagenes/facebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="static/imagenes/instagram.png" alt="Instagram"></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="static/imagenes/twitter.png" alt="Twitter"></a>
+                <a href="https://www.whatsapp.com/" target="_blank"><img src="static/imagenes/whatsapp.png" alt="Watsapp"></a>
+            </section>
+`;
+document.getElementById("footer").innerHTML = footer
+
+
+// Capturamos el evento de envío del formulario
+document.getElementById('formulario').addEventListener('submit', function (event) {
+    event.preventDefault(); // Evitamos que se envie el form 
+
+        
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+//validación del formulario de contacto
+
+     //definimos variables de datos necesarias
+
+    let nombre = document.getElementById("nom").value
+    let apellido = document.getElementById("ape").value
+    let correo = document.getElementById("correo").value
+    let consulta = document.getElementById("consulta").value
+    let telefono = document.getElementById("tel").value
+    let check = document.getElementById("check")
+
+
+    //realizamos validación de email con expresión regular
+    function validarCorreo(correo) {
+        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+        return regex.test(correo)
+    }
+
+    //realizamos la validación de campos obligatorios + email con formato correcto
+    if ( nombre === "" || apellido === "" || consulta === "" || validarCorreo(correo) === false ) {
+        document.getElementById("solicitud").textContent = 
+        `Verifique los datos ingresados`
+    } else {
+        document.getElementById("solicitud").textContent = 
+        `Consulta enviada exitosamente. Le responderemos a su email dentro de las próximas 48hs. ¡Muchas gracias por contactarnos!`
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        
+// Si pasa las validaciones, hacemos la solicitud.
+
+        const URL = "http://127.0.0.1:5000/"
+
+//Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+//const URL = "https://USUARIO.pythonanywhere.com/"
+
+        var formData = new FormData(this);
+
+        // Realizamos la solicitud POST al servidor
+        fetch(URL + 'consultas', {
+            method: 'POST',
+            body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+        })
+
+        //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
+        .then(function (response) {
+                if (response.ok) { 
+                    //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                    // linea = 1010
+                    return response.json(); 
+                } else {
+                    // Si hubo un error, lanzar explícitamente una excepción
+                    // para ser "catcheada" más adelante
+                    // linea = 1020
+                    alert("Error1")
+                    throw new Error('Error al agregar la consulta.');
+                }
+        })
+
+            //Respuesta OK, muestra una alerta informando que el cotizacion se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo cotizacion.
+            .then(function (data) {
+                document.getElementById("solicitud").innerHTML = 
+                alert('Consulta enviada correctamente.');
+            })
+
+            // En caso de error, mostramos una alerta con un mensaje de error.
+            .catch(function (error) {
+                alert(`Error al enviar la consulta.1`);
+
+            })
+            
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+//validamos la posibilidad de recibir información al telefono (cargando el número y tildando el checkbox, sumado a las condiciones anteriores)
+if ( nombre !== "" && apellido !== "" && consulta !== "" && validarCorreo(correo) !== false &&telefono !== "" && check.checked === true) {
+    document.getElementById("solicitud-tel").textContent = 
+    `También le enviaremos a su teléfono información de nuestras mejores promociones`
+}
+limpiarFormulario()
+}
+    
+
+})
+    function limpiarFormulario() {
+        //limpiamos los inputs del formulario
+    document.getElementById("nom").value = ""
+    document.getElementById("ape").value = ""
+    document.getElementById("correo").value = ""
+    document.getElementById("consulta").value = ""
+    document.getElementById("tel").value = ""
+    check.checked = false
+    // document.getElementById("solicitud").textContent = ""
+    // document.getElementById("solicitud-tel").textContent = ""
+    }
+
+
+    //     // Ingresar como administrador
+    //     function ingresarAdministrador() {
+    //     //definimos variables de datos necesarias
+    //     const contraCorrecta = "admin2024"
+    //     const usuario = document.getElementById("usuario").value
+    //     const contraIngresada = document.getElementById("contrasena").value
+    //     // const contraSs = localStorage.getItem("ContraseñaIngresada")
+    //     const seccionAdmin = document.getElementById("func-admin")
+        
+    //     // //definimos y asignasmos valores a Usurario y Contrasseña en sS
+    //     localStorage.setItem("Usuario", usuario)
+    //     localStorage.setItem("ContraseñaIngresada", contraIngresada) 
+        
+    //     //llamamos a la funcion que agrega o remueve la clase del div, según si la contraseña coincide o no (pasandole los parametros que necesita)
+    //     compararSs(contraCorrecta, contraIngresada, seccionAdmin)
+    // }
+
+    // function compararSs(contraCorrecta, contraIngresada, seccionAdmin) {
+    //     // si la contraseña de sessionstorage es igual a la contraCorrecta, quitamos la clase con display none, sino la agregamos.
+    //     esAdmin = localStorage.getItem('EsAdmin') 
+    //     console.log('comparass  ES '+ localStorage.getItem('EsAdmin')  )
+    //     console.log('contraCorrecta  ES '+ contraCorrecta  )
+    //     console.log('contraIngresada  ES '+ contraIngresada  )
+    //     if ((contraCorrecta === contraIngresada))  {
+    //         console.log('verdadero comp')
+    //     }    
+    //     if (esAdmin)  {
+    //         console.log('verdadero esadmin')
+    //     }    
+
+    //     if ((contraCorrecta === contraIngresada) || esAdmin===true )  {
+    //         seccionAdmin.classList.remove("funcAdminInactivo")
+        
+    //         esAdmin = localStorage.getItem('EsAdmin') 
+    //         console.log ('ver v ' + esAdmin);
+    //         localStorage.setItem('EsAdmin', true);
+
+    //     } else {
+    //         seccionAdmin.classList.add("funcAdminInactivo")
+    //         localStorage.setItem('EsAdmin', false);
+            
+    //         esAdmin = localStorage.getItem('EsAdmin') 
+    //         console.log ('ver f ' + esAdmin);
+    //     }
+    // }
+
+
+    </script>
+</body>
+</html>

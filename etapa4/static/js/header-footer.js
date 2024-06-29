@@ -33,6 +33,20 @@ let footer =`
 `;
 document.getElementById("footer").innerHTML = footer
 
+        //armamos bloque footer
+        let footer2 =`
+            <a href="#header"><img src="static/imagenes/logo-negro-furaveri.png" alt="Logo Hotel" class="logo-footer"></a>
+            <section class="social">
+                <a href="https://www.facebook.com/" target="_blank"><img src="static/imagenes/facebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="static/imagenes/instagram.png" alt="Instagram"></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="static/imagenes/twitter.png" alt="Twitter"></a>
+                <a href="https://www.whatsapp.com/" target="_blank"><img src="static/imagenes/whatsapp.png" alt="Watsapp"></a>
+            </section>
+        `;
+        document.getElementById("footer2").innerHTML = footer2
+
+
+
 
 //armamos bloque menuAdmin
 let menuAdmin =`

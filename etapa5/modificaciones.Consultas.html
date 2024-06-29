@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar consultas</title>
+    <link rel="stylesheet" href="./static/css/estilos.css">
+    <link rel="shortcut icon" href="static/imagenes/hotel.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="navbar-index">
+        <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
+        <section class="nav">
+            <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoCotizaciones.html"> 
+                    <button class="boton-header">LISTAR COTIZACIONES</button>
+                </a>
+                <a href="modificacionesCotizaciones.html"> 
+                    <button class="boton-header">MODIFICAR COTIZACIÓN</button>
+                </a>
+                <a href="listadoEliminarCotizaciones.html"> 
+                    <button class="boton-header">ELIMINAR COTIZACIÓN</button>
+                </a>
+            </nav>
+            <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoConsultas.html"> 
+                    <button class="boton-header">LISTAR CONSULTAS</button>
+                </a>
+                <a href="modificaciones.Consultas.html"> 
+                    <button class="boton-header">MODIFICAR CONSULTAS</button>
+                </a>
+                <a href="listadoEliminarConsultas.html"> 
+                    <button class="boton-header">ELIMINAR CONSULTAS</button>
+                </a>
+            </nav>
+        </section>
+    </header>
+
+    <div class="logo-centrado">
+        <h1>ADMINISTRACIÓN</h1>
+    </div>
+    <h3>Modificar Consultas del inventario</h3><br>
+
+    <!-- Contenedor principal que será controlado por JavaScript. Este contenedor tendrá dos formularios. -->
+    <div id="app">
+        <!-- Primer formulario: Selector de cotizacion. LLama a la función obtenerCotizacion cuando se envíe el formulario -->
+        <form id="form-obtener-consulta">
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" required><br>
+            <button type="submit" class="boton2-form">Modificar consulta</button> 
+            <a href="contacto.html" class="boton1-form">Cerrar sesión</a>
+        </form>
+
+        <!-- Segundo formulario: se muestra solo si mostrarDatosCotizacion es verdadero. Llama a la función guardarCambios -->
+        <div id="datos-consulta" style="display: none;">
+            <h2>Datos de la consulta</h2>
+            <form id="form-guardar-cambios">
+                <label for="nom" class="nom">Nombre: *</label>
+                <input type="text" name="nom" id="nom" maxlength="30"> 
+
+                <label for="ape" class="ape">Apellido: *</label>
+                <input type="text" name="ape" id="ape"> 
+
+                <label for="correo" class="correo">E-mail: </label>
+                <input type="email" name="correo" id="correo" placeholder="juan@example.com">
+
+                <label for="tel" class="tel">Teléfono:</label> 
+                <input type="number" id="tel" name="tel">
+
+                <label for="consulta" class="consulta">Consulta: *</label>   
+                <textarea name="consulta" id="consulta" placeholder="Escriba su consulta"></textarea>
+                
+                <label for="check" class="check">Deseo recibir promociones a mi teléfono.</label>
+                <input type="checkbox" id="check" name="check">  
+                
+                <button type="submit" class="boton2-form">Guardar Cambios</button>
+                <a href="modificaciones.html" class="boton3-form">Cancelar</a>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer" id="footer"></footer>
+    <script>
+
+
+        //armamos bloque footer
+        let footer =`
+            <a href="#header"><img src="static/imagenes/logo-negro-furaveri.png" alt="Logo Hotel" class="logo-footer"></a>
+            <section class="social">
+                <a href="https://www.facebook.com/" target="_blank"><img src="static/imagenes/facebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="static/imagenes/instagram.png" alt="Instagram"></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="static/imagenes/twitter.png" alt="Twitter"></a>
+                <a href="https://www.whatsapp.com/" target="_blank"><img src="static/imagenes/whatsapp.png" alt="Watsapp"></a>
+            </section>
+        `;
+        document.getElementById("footer").innerHTML = footer
+
+
+
+
+        const URL = "http://127.0.0.1:5000/"
+        // const URL = "https://juanpablocodo.pythonanywhere.com/"
+
+
+        // Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+        //const URL = "https://USUARIO.pythonanywhere.com/"
+
+        // Variables de estado para controlar la visibilidad y los datos del formulario
+        let codigo = '';
+        let nom = '';
+        let ape = '';
+        let correo = '';
+        let consulta = '';
+        let tel = '';
+        let check = '';
+        let mostrarDatosConsulta = false;
+
+
+        document.getElementById('form-obtener-consulta').addEventListener('submit', obtenerConsulta);
+        document.getElementById('form-guardar-cambios').addEventListener('submit', guardarCambios);
+        // document.getElementById('nuevaImagen').addEventListener('change', seleccionarImagen);
+
+        // Se ejecuta cuando se envía el formulario de consulta. Realiza una solicitud GET a la API y obtiene los datos del cotizacion correspondiente al código ingresado.
+        function obtenerConsulta(event) {
+            event.preventDefault();
+            codigo = document.getElementById('codigo').value;
+            alert(`codigo: ${codigo}`);
+            fetch(URL + 'consultas/' + codigo)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw new Error('Error al obtener los datos de la consulta.')
+                    }
+                })
+                .then(data => {
+                    nom = data.nom;
+                    ape = data.ape;
+                    correo = data.correo;
+                    consulta = data.consulta;
+                    tel = data.tel;
+                    check = data.check;
+                    mostrarDatosConsulta = true; //Activa la vista del segundo formulario
+                    mostrarFormulario();
+
+                })
+                .catch(error => {
+                    alert('Código no encontrado.');
+                });
+        }
+
+        // Muestra el formulario con los datos del cotizacion
+        function mostrarFormulario() {
+            if (mostrarDatosConsulta) {
+                document.getElementById('nom').value = nom;
+                document.getElementById('ape').value = ape;
+                document.getElementById('correo').value = correo;
+                document.getElementById('consulta').value = consulta;
+                document.getElementById('tel').value = tel;
+                // Asignar true o false a la propiedad 'checked' del checkbox
+                const checkElement = document.getElementById('check');
+                checkElement.checked = check === 1;
+
+                
+
+            //     const imagenActual = document.getElementById('imagen-actual');
+            //     if (imagen_url && !imagenSeleccionada) { // Verifica si imagen_url no está vacía y no se ha seleccionado una imagen
+                    
+            //         // imagenActual.src = './static/imagenes/' + imagen_url;                    
+            //         imagenActual.src = 'https://www.pythonanywhere.com/user/juanpablocodo/files/home/juanpablocodo/mysite/static/imagenes/' + imagen_url;                    
+			// //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+            //         //imagenActual.src = 'https://www.pythonanywhere.com/user/USUARIO/files/home/USUARIO/mysite/static/imagenes/' + imagen_url;
+            //         imagenActual.style.display = 'block'; // Muestra la imagen actual
+            //     } else {
+            //         imagenActual.style.display = 'none'; // Oculta la imagen si no hay URL
+            //     }
+
+                document.getElementById('datos-consulta').style.display = 'block';
+            } else {
+                document.getElementById('datos-consulta').style.display = 'none';
+            }
+        }
+
+        // // Se activa cuando el usuario selecciona una imagen para cargar.
+        // function seleccionarImagen(event) {
+        //     const file = event.target.files[0];
+        //     imagenSeleccionada = file;
+        //     imagenUrlTemp = URL.createObjectURL(file); // Crea una URL temporal para la vista previa
+
+        //     const imagenVistaPrevia = document.getElementById('imagen-vista-previa');
+        //     imagenVistaPrevia.src = imagenUrlTemp;
+        //     imagenVistaPrevia.style.display = 'block';
+        // }
+
+        // Se usa para enviar los datos modificados del cotizacion al servidor.
+        function guardarCambios(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('codigo', codigo);
+            formData.append('nom', document.getElementById('nom').value);
+            formData.append('ape', document.getElementById('ape').value);
+            formData.append('correo', document.getElementById('correo').value);
+            formData.append('consulta', document.getElementById('consulta').value);
+            formData.append('tel', document.getElementById('tel').value);
+            const checkElement = document.getElementById('check');
+            formData.append('check', checkElement.checked ? 'on' : 'off');
+
+            
+
+            // // Si se ha seleccionado una imagen nueva, la añade al formData. 
+            // if (imagenSeleccionada) {
+            //     formData.append('imagen', imagenSeleccionada, imagenSeleccionada.name);
+            // }
+
+            fetch(URL + 'consultas/' + codigo, {
+                method: 'PUT',
+                body: formData,
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw new Error('Error al guardar los cambios de la consulta.')
+                    }
+                })
+                .then(data => {
+                    alert('Consulta actualizada correctamente.');
+                    // limpiarFormulario();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al actualizar la consulta.');
+                });
+
+                limpiarFormulario()
+        }
+
+
+        function limpiarFormulario() {
+            document.getElementById('codigo').value = '';
+            document.getElementById('nom').value = '';
+            document.getElementById('ape').value = '';
+            document.getElementById('correo').value = '';
+            document.getElementById('consulta').value = '';
+            document.getElementById('tel').value = '';
+            document.getElementById('check').value = '';
+
+            codigo = '';
+            nom = '';
+            ape = '';
+            correo = '';
+            consulta = '';
+            tel = '';
+            check = '';
+            mostrarDatosConsulta = false;
+
+        document.getElementById('datos-consulta').style.display = 'none';
+        }
+        //// Restablece todas las variables relacionadas con el formulario a sus valores iniciales, lo que efectivamente "limpia" el formulario.
+        // function limpiarFormulario() {
+        //     document.getElementById('codigo').value = '';
+        //     document.getElementById('descripcionModificar').value = '';
+        //     document.getElementById('cantidadModificar').value = '';
+        //     document.getElementById('precioModificar').value = '';
+        //     document.getElementById('proveModificar').value = '';
+        //     document.getElementById('nuevaImagen').value = '';
+
+        //     const imagenActual = document.getElementById('imagen-actual');
+        //     imagenActual.style.display = 'none';
+
+        //     const imagenVistaPrevia = document.getElementById('imagen-vista-previa');
+        //     imagenVistaPrevia.style.display = 'none';
+
+        //     codigo = '';
+        //     descripcion = '';
+        //     cantidad = '';
+        //     precio = '';
+        //     proveedor = '';
+        //     imagen_url = '';
+        //     imagenSeleccionada = null;
+        //     imagenUrlTemp = null;
+        //     mostrarDatosCotizacion = false;
+
+        //     document.getElementById('datos-cotizacion').style.display = 'none';
+        // }
+    </script>
+</body>
+</html>

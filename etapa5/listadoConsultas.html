@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Consultas</title>
+    <link rel="stylesheet" href="./static/css/estilos.css">
+    <link rel="shortcut icon" href="static/imagenes/hotel.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="navbar-index">
+        <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
+        <section class="nav">
+          
+            <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoCotizaciones.html"> 
+                    <button class="boton-header">LISTAR COTIZACIONES</button>
+                </a>
+                <a href="modificacionesCotizaciones.html"> 
+                    <button class="boton-header">MODIFICAR COTIZACIÓN</button>
+                </a>
+                <a href="listadoEliminarCotizaciones.html"> 
+                    <button class="boton-header">ELIMINAR COTIZACIÓN</button>
+                </a>
+            </nav>
+            <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoConsultas.html"> 
+                    <button class="boton-header">LISTAR CONSULTAS</button>
+                </a>
+                <a href="modificaciones.Consultas.html"> 
+                    <button class="boton-header">MODIFICAR CONSULTAS</button>
+                </a>
+                <a href="listadoEliminarConsultas.html"> 
+                    <button class="boton-header">ELIMINAR CONSULTAS</button>
+                </a>
+            </nav>
+        </section>
+    </header>
+
+    <div class="logo-centrado">
+        <h1>ADMINISTRACIÓN</h1>
+    </div>
+    <h3>Listado de Consultas</h3><br>
+
+    <table> <!-- Se crea una tabla para mostrar los cotizaciones. -->
+        <thead> <!--Encabezado de la tabla con columnas para código, descripción, cantidad, precio y acciones.-->
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Apellido</th>                
+                <th>email</th>
+                <th>Telefono</th>
+                <th>Consulta</th>
+                <th>Check +info</th>
+            </tr>
+        </thead>
+        <tbody id="tablaConsultas"> </tbody>
+    </table><br>
+
+    <div class="contenedor-centrado">
+        <a href="contacto.html" class="boton1-form">Cerrar sesión</a>
+    </div>
+
+    <footer class="footer" id="footer">
+    </footer>
+    <script>
+
+
+        //armamos bloque footer
+        let footer =`
+            <a href="#header"><img src="static/imagenes/logo-negro-furaveri.png" alt="Logo Hotel" class="logo-footer"></a>
+            <section class="social">
+                <a href="https://www.facebook.com/" target="_blank"><img src="static/imagenes/facebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="static/imagenes/instagram.png" alt="Instagram"></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="static/imagenes/twitter.png" alt="Twitter"></a>
+                <a href="https://www.whatsapp.com/" target="_blank"><img src="static/imagenes/whatsapp.png" alt="Watsapp"></a>
+            </section>
+        `;
+        document.getElementById("footer").innerHTML = footer
+
+
+
+        const URL = "http://127.0.0.1:5000/"
+        // const URL = "https://juanpablocodo.pythonanywhere.com/"
+
+
+        // Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+        //const URL = "https://USUARIO.pythonanywhere.com/"
+        
+
+        // Realizamos la solicitud GET al servidor para obtener todos los cotizacions.
+        fetch(URL + 'consultas')
+            .then(function (response) {
+                if (response.ok) {
+                    //Si la respuesta es exitosa (response.ok), convierte el cuerpo de la respuesta de formato JSON a un objeto JavaScript y pasa estos datos a la siguiente promesa then.
+                    return response.json(); 
+            } else {
+                    // Si hubo un error, lanzar explícitamente una excepción para ser "catcheada" más adelante
+                    throw new Error('Error al obtener las consultas.');
+                }
+            })
+
+            //Esta función maneja los datos convertidos del JSON.
+            .then(function (data) {
+                let tablaConsultas = document.getElementById('tablaConsultas'); //Selecciona el elemento del DOM donde se mostrarán los cotizaciones.
+
+                // Iteramos sobre cada cotizacion y agregamos filas a la tabla
+                for (let consulta of data) {
+                    let fila = document.createElement('tr'); //Crea una nueva fila de tabla (<tr>) para cada cotizacion.
+                    fila.innerHTML = 
+                        '<td align="center">' + consulta.codigo + '</td>' +
+                        '<td align="center">' + consulta.nom + '</td>' +
+                        '<td align="center">' + consulta.ape + '</td>' +
+                        '<td align="center">' + consulta.correo + '</td>' +
+                        '<td align="center">' + consulta.tel + '</td>' +
+                        '<td align="center">' + consulta.consulta + '</td>' +
+                        '<td type="checkbox" align="center">' + quiereInfo(consulta.check) + '</td>';
+
+                        // Mostrar miniatura de la imagen
+                        // '<td><img src=./static/imagenes/' + cotizacion.imagen_url +' alt="Imagen del cotizacion" style="width: 100px;"></td>' + '<td align="right">' + cotizacion.proveedor + '</td>';
+                        // '<td><img src=./static/imagenes/' + cotizacion.imagen_url +' alt="Imagen del cotizacion" style="width: 100px;"></td>' + '<td align="right">' + cotizacion.proveedor + '</td>';
+                        
+                        //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+                        //'<td><img src=https://www.pythonanywhere.com/user/USUARIO/files/home/USUARIO/mysite/static/imagenes/' + cotizacion.imagen_url +' alt="Imagen del cotizacion" style="width: 100px;"></td>' + '<td align="right">' + cotizacion.proveedor + '</td>';
+                    
+                    //Una vez que se crea la fila con el contenido del cotizacion, se agrega a la tabla utilizando el método appendChild del elemento tablaProductos.
+                    tablaConsultas.appendChild(fila);
+                }
+            })
+
+            //Captura y maneja errores, mostrando una alerta en caso de error al obtener los cotizaciones.
+            .catch(function (error) {
+                // Código para manejar errores
+                alert('Error al obtener las consultas1.');
+            });
+
+            function quiereInfo(valor){
+                if (valor ===1) {
+                    return 'SI'
+                } else {return 'NO'}
+            }
+
+
+    </script>
+</body>
+</html>
