@@ -313,18 +313,10 @@
         //     document.getElementById('datos-cotizacion').style.display = 'none';
         // }
 
-        function fechaTipoDate(p_fecha){
-            var diferencia = 1000 * 60 * 60 * 3 * 1;
-            var fecha1 = new Date(p_fecha);
-            var fecha = new Date(fecha1.getTime() + (diferencia));
-            var year = fecha.getFullYear();
-            var month = ('0' + (fecha.getMonth() + 1)).slice(-2); // Los meses empiezan desde 0
-            var day = ('0' + fecha.getDate()).slice(-2);
-            var fechaFormateada = year + '-' + month + '-' + day;
-            return fechaFormateada;
-        }
+   
 
 
     </script>
+    <script src="static/js/fechas.js" defer></script>
 </body>
 </html>

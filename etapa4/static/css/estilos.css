@@ -164,7 +164,7 @@ input[type="submit"]:hover {
     border: 1.5px solid white;
     background: #3c3c3c;
     cursor: pointer;
-    scale: 1.05;
+    scale: 1.0;
 }
 
 
@@ -183,7 +183,7 @@ input[type="submit"]:hover {
 .boton2-form:hover{
     background: #2c8cdb;
     cursor: pointer;
-    scale: 1.05;
+    scale: 1.0;
     border: 1.5px solid white;
 }
 
@@ -202,7 +202,7 @@ input[type="submit"]:hover {
 .boton3-form:hover{
     background: #4a4a4a;
     cursor: pointer;
-    scale: 1.05;
+    scale: 1.00;
     border: 1.5px solid white;
 }
 
@@ -221,7 +221,7 @@ input[type="submit"]:hover {
 .boton4-form:hover{
     background: #ff2f2f;
     cursor: pointer;
-    scale: 1.05;
+    scale: 1.00;
     border: 1.5px solid white;
 }
 
@@ -247,7 +247,7 @@ input[type="submit"]:hover {
     border: 1.5px solid white;
     background: #3c3c3c;
     cursor: pointer;
-    scale: 1.05;
+    scale: 1.00;
 }
 
 .nav h2{

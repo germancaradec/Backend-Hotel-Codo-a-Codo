@@ -33,3 +33,31 @@ let footer =`
 `;
 document.getElementById("footer").innerHTML = footer
 
+
+//armamos bloque menuAdmin
+let menuAdmin =`
+         <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoCotizaciones.html"> 
+                    <button class="boton-header">LISTAR COTIZACIONES</button>
+                </a>
+                <a href="modificacionesCotizaciones.html"> 
+                    <button class="boton-header">MODIFICAR COTIZACIÓN</button>
+                </a>
+                <a href="listadoEliminarCotizaciones.html"> 
+                    <button class="boton-header">ELIMINAR COTIZACIÓN</button>
+                </a>
+            </nav>
+            <nav id="func-admin" class="funcAdminInactivo">
+                <a href="listadoConsultas.html"> 
+                    <button class="boton-header">LISTAR CONSULTAS</button>
+                </a>
+                <a href="modificaciones.Consultas.html"> 
+                    <button class="boton-header">MODIFICAR CONSULTAS</button>
+                </a>
+                <a href="listadoEliminarConsultas.html"> 
+                    <button class="boton-header">ELIMINAR CONSULTAS</button>
+                </a>
+            </nav>
+`;
+document.getElementById("menuAdmin").innerHTML = menuAdmin
+
